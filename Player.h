@@ -203,7 +203,7 @@ class Player{
         std::vector<Chain_Base*>* getChains();
         void buyThirdChain();
         void sellChain();
-        void startNewChain(Chain_Base* new_chain, Card* card);
+        void startNewChain(Chain_Base* new_chain, Card* card, bool specified_input);
 
         /**
          * @brief  prints the top card of the player's hand (with in == false) or all of the player's hand (with ain == true) to the supplied ostream

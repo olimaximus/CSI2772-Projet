@@ -81,11 +81,11 @@ Card* Player::playCard(Card* input, bool specified_input){
               std::cout << "Player " <<pName << " has reached the maximum  value of chain ("<<MAX_NUM_CHAINS<<")." << std::endl;
               sellChain();
               // starting a new chain 
-              startNewChain(new_chain, card);
+              startNewChain(new_chain, card, specified_input);
 
             }
             else if(pChains.size() < ALLOWED_CHAINS){
-                startNewChain(new_chain, card);
+                startNewChain(new_chain, card, specified_input);
             }else{
                 std::cout << ">>> Player " <<pName << " has reached the maximum allowed value of chain ("<<ALLOWED_CHAINS<<")." << std::endl;
                 if (pCoins >= 3) {
@@ -106,12 +106,12 @@ Card* Player::playCard(Card* input, bool specified_input){
                     }
                     else{
                         sellChain();
-                        startNewChain(new_chain, card);
+                        startNewChain(new_chain, card, specified_input);
 
                     } // end of else
                 } else {
                     sellChain();
-                    startNewChain(new_chain, card);
+                    startNewChain(new_chain, card, specified_input);
                 }
             } // end of else
         } // end of if
@@ -369,7 +369,7 @@ void Player::sellChain() {
               pChains.erase(pChains.begin() + idx); // remove the selected chain
 }
 
-void Player::startNewChain(Chain_Base* new_chain, Card* card) {
+void Player::startNewChain(Chain_Base* new_chain, Card* card, bool specifiedInput) {
     *new_chain += card;
     pChains.push_back(new_chain);
 
@@ -377,5 +377,5 @@ void Player::startNewChain(Chain_Base* new_chain, Card* card) {
         (*new_chain).setChainType(card->getName());
     }
 
-    card = pHand->play();
+    if (!specifiedInput) pHand->play();
 }
