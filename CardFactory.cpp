@@ -19,8 +19,8 @@ CardFactory* CardFactory::getFactory(){
  * @return Deck* 
  */
 Deck* CardFactory::getDeck(){
-    unsigned seed = 0;
-    std::shuffle(deck->begin(), deck->end(), std::default_random_engine(seed)); // shuffle 
+    int seed = static_cast<int>(chrono::system_clock::now().time_since_epoch().count());
+    shuffle(deck->begin(), deck->end(), default_random_engine(seed)); // shuffle 
     return deck;
 }
 
@@ -30,46 +30,46 @@ Deck* CardFactory::getDeck(){
  * 
  */
 CardFactory::CardFactory(){
-    // initialize the deck
+    // Initializer le deck
     deck =  new Deck();
-    // add 20 Blue Cards
+    // Ajouter 20 cartes Blue
     for(int i = 0; i <  20;  i++){
             Blue* b = new Blue;
             deck ->push_back(b);
     
             
     }
-    // add 18 Chili Cards
+    // Ajouter 18 cartes Chili
     for(int i = 0; i < 18; i++){
             Chili* c = new Chili;
             deck -> push_back(c);
     }
-    // add 16 Stink Cards
+    // Ajouter 16 cartes Stink
     for(int i = 0; i < 16; i++){
             Stink* s = new Stink;
             deck -> push_back(s);
     }
-    // add 14 Green Cards
+    // Ajouter 14 cartes Green
     for(int i = 0; i < 14; i++){
             Green* g = new Green;
             deck -> push_back(g);
     }
-    // add 12 soy Cards
+    // Ajouter 12 cartes soy
     for(int i = 0; i < 12; i++){
             soy* s = new soy;
             deck -> push_back(s);
     }
-    // add 10 black Cards
+    // Ajouter 10 cartes black
     for(int i = 0; i < 10;  i++){
             black* b = new black;
             deck -> push_back(b);
     }
-    // add 8 Red  Cards
+    // Ajouter 8 cartes Red
     for(int i = 0; i < 8; i++){
             Red* r = new Red;
             deck -> push_back(r);
     }
-    // add 6 garden Cards
+    // Ajouter 6 cartes garden
     for(int i = 0; i < 6; i++){
             garden* g = new garden;
             deck -> push_back(g);
