@@ -1,21 +1,23 @@
-#pragma once
 
-#include <iostream>
-#include <vector>
-#include <stdexcept>
-#include "Card.h" // Assuming you have a Card class
 #include <algorithm>
 #include <random>
 
+#ifndef CARDFACTORY_H
+#define CARDFACTORY_H
+
+#include "Card.h"
+#include "Deck.h"
+
+class CardFactory{
+    private:
+        Deck* deck;
+        CardFactory();
+    public:
+        static CardFactory* instance;
+        static CardFactory* getFactory();
+        Deck* getDeck();
 
 
-class CardFactory {
-private:
-    std::vector<Card*> allCards;
-    
-    CardFactory();
-
-public:
-    static CardFactory* getFactory();
-    Card* createCard() const;
 };
+
+#endif

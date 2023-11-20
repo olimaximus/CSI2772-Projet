@@ -1,42 +1,60 @@
 #include "Deck.h"
-#include <iostream>
-
 using namespace std;
-#include <algorithm>
-#include <random>
 
-Deck::Deck() {
-    // Assuming CardFactory is used to generate all the cards needed for the game
-    CardFactory* cardFactory = CardFactory::getFactory();
-
-    // Generate all 104 cards and shuffle them
-    for (int i = 0; i < 104; ++i) {
-        cards.push_back(cardFactory->createCard());
-    }
-
-    std::random_device rd;
-    std::mt19937 g(rd());
-    std::shuffle(cards.begin(), cards.end(), g);
+/**
+ * @brief returns and removes the top card from the deck
+ * 
+ * @return Card* 
+ */
+Card* Deck::draw(){
+    Card* card =  this->back(); // get the last added card
+    this->pop_back(); // remove the last element from the deck
+    return card;  
 }
 
-Card* Deck::draw() {
-    if (!cards.empty()) {
-        Card* drawnCard = cards.back();
-        cards.pop_back();
-        return drawnCard;
-    } else {
-        return nullptr; // Deck is empty
+/**
+ * @brief assignment operator for the class Deck
+ * 
+ * @param d 
+ * @return Deck& 
+ */
+Deck& Deck::operator=(const Deck& d){
+    for(int i = 0 ; i < d.size() && i < 104; i++){
+        this->push_back(d[i]);
     }
+    return *this;
+}
+/**
+ * @brief insertion operator to display the deck object
+ * 
+ * @param output 
+ * @param d 
+ * @return ostream& 
+ */
+ostream& operator<<( ostream& output, const Deck& d ){
+
+    for(int i = 0; i < d.size(); i++){
+        output << d.at(i)->getName()[0] << endl;
+    }
+
+    return output;
 }
 
-std::ostream& operator<<(std::ostream& out, const Deck& deck) {
-    for (const auto& card : deck.cards) {
-        out << card->getName() << " ";
+
+/**
+ * @brief write the deck inside a file
+ * 
+ * @param filename 
+ */
+void Deck::saveDeck(std::ofstream& filename){
+    for(int i = 0;  i < this->size() ; i++){
+        this->at(i)->saveCard(filename);
+        filename << std::endl;
     }
-    return out;
+    std::cout << "Deck saved." << std::endl;
 }
 
-// Explicit instantiation for the types used in the project
-//template class Deck;
-// Add instantiations for other types if necessary
+
+
+
 

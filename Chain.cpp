@@ -1,40 +1,83 @@
 #include "Chain.h"
-#include <iostream>
+#include <iomanip>
 
-using namespace std;
-
-template <typename T>
-Chain<T>& Chain<T>::operator+=(T* card) {
-    if (cards.empty() || dynamic_cast<T*>(cards.front())) {
-        cards.push_back(card);
-    } else {
-        throw IllegalType();  // Exception si le type de carte ne correspond pas
-    }
-    return *this;
+/**
+ * @brief retourne le nombre de cartes dans le deck
+ * 
+ * @return int 
+ */
+int Chain_Base::getSize(){
+    return chain.size();
 }
 
-template <typename T>
-int Chain<T>::sell() {
-    int chainSize = cards.size();
-    int coinsEarned = 0;
-
-    if (chainSize >= 3) {
-        coinsEarned = cards.front()->getCardsPerCoin(chainSize);
-        // Supprimer les cartes de la chaîne
-        cards.clear();
-    }
-
-    return coinsEarned;
+/**
+ * @brief Set the ChainType of the Chain_Base
+ * 
+ * @param chainType 
+ */
+void Chain_Base::setChainType(std::string chainType){
+    chainType = chainType;
 }
 
-template <typename T>
-std::ostream& operator<<(std::ostream& out, const Chain<T>& chain) {
-    for (const auto& card : chain.cards) {
-        out << card->getName() << " ";
-    }
-    return out;
+/**
+ * @brief Get the Chain Type 
+ * 
+ * @return std::string 
+ */
+std::string Chain_Base::getChainType(){
+    return chainType;
 }
 
-// Explicit instantiation for the types used in the project
-//template class Chain<Red>;
-// Add instantiations for other types if necessary
+/**
+ * @brief write chain inside a file
+ * 
+ * @tparam T 
+ * @param filename 
+ */
+void Chain_Base::saveChain(std::ofstream& filename){
+    // std::cout << "Chain Type (Chain)" <<  chainType << std::endl; // Debug purpose
+    filename << std::endl << chainType << std::endl;
+    for(int i = 0; i < chain.size() ; i++){
+        chain.at(i)->saveCard(filename);
+        filename << std::endl;
+    }
+
+    std::cout << "Chain saved." << std::endl;
+}
+
+/**
+ * @brief insertion operator to display the chain information
+ * 
+ * @param output 
+ * @param d 
+ * @return std::ostream& 
+ */
+std::ostream& operator<<( std::ostream &output, const Chain<Card*> & d ){
+    output << d.chainType << " ";
+    for(int i = 0; i < d.chain.size(); i++){
+        d.chain.at(i)->print(output);
+        output << " ";
+    }
+    
+    return output;
+};
+
+
+
+
+/**
+ * @brief insertion operator display the chain_base information
+ * 
+ * @param output 
+ * @param d 
+ * @return std::ostream& 
+ */
+std::ostream& operator<<( std::ostream &output, const Chain_Base & d ){
+    output << d.chainType  << " " << std::setw(4);
+    for(int i = 0; i < d.chain.size(); i++){
+        d.chain.at(i)->print(output);
+        output << " ";
+    }
+    
+    return output;
+}
