@@ -15,16 +15,16 @@ int Chain_Base::getSize(){
  * 
  * @param chainType 
  */
-void Chain_Base::setChainType(std::string chainType){
+void Chain_Base::setChainType(string chainType){
     chainType = chainType;
 }
 
 /**
  * @brief Get the Chain Type 
  * 
- * @return std::string 
+ * @return string 
  */
-std::string Chain_Base::getChainType(){
+string Chain_Base::getChainType(){
     return chainType;
 }
 
@@ -34,15 +34,14 @@ std::string Chain_Base::getChainType(){
  * @tparam T 
  * @param filename 
  */
-void Chain_Base::saveChain(std::ofstream& filename){
-    // std::cout << "Chain Type (Chain)" <<  chainType << std::endl; // Debug purpose
-    filename << std::endl << chainType << std::endl;
+void Chain_Base::saveChain(ofstream& filename){
+    filename << endl << chainType << endl;
     for(int i = 0; i < chain.size() ; i++){
         chain.at(i)->saveCard(filename);
-        filename << std::endl;
+        filename << endl;
     }
 
-    std::cout << "Chain saved." << std::endl;
+    cout << "Chain saved." << endl;
 }
 
 /**
@@ -50,9 +49,9 @@ void Chain_Base::saveChain(std::ofstream& filename){
  * 
  * @param output 
  * @param d 
- * @return std::ostream& 
+ * @return ostream& 
  */
-std::ostream& operator<<( std::ostream &output, const Chain<Card*> & d ){
+ostream& operator<<( ostream &output, const Chain<Card*> & d ){
     output << d.chainType << " ";
     for(int i = 0; i < d.chain.size(); i++){
         d.chain.at(i)->print(output);
@@ -70,10 +69,10 @@ std::ostream& operator<<( std::ostream &output, const Chain<Card*> & d ){
  * 
  * @param output 
  * @param d 
- * @return std::ostream& 
+ * @return ostream& 
  */
-std::ostream& operator<<( std::ostream &output, const Chain_Base & d ){
-    output << d.chainType  << " " << std::setw(4);
+ostream& operator<<( ostream &output, const Chain_Base & d ){
+    output << d.chainType  << " " << setw(4);
     for(int i = 0; i < d.chain.size(); i++){
         d.chain.at(i)->print(output);
         output << " ";

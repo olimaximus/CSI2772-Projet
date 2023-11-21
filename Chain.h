@@ -9,26 +9,25 @@
 #include <stdexcept>
 #include "Card.h"
 
+using namespace std;
+
 class CardFactory;
 
 class Chain_Base{
     protected:
-        std::vector<Card*>  chain;
-        std::string chainType;
+        vector<Card*>  chain;
+        string chainType;
     public:
-        // int sell(){return 0;} ; // unimplemented
         int getSize();
-        std::string getChainType();
-        void setChainType(std::string chainType);
-        void saveChain(std::ofstream& filename);
+        string getChainType();
+        void setChainType(string chainType);
+        void saveChain(ofstream& filename);
         Chain_Base& operator+=(Card* card){
-
-            // std::cout << "(Chain_Base.h) chainType : " << chainType << std::endl; // debug purpose
             chain.push_back(card);
             return *this;
         };
         virtual ~Chain_Base() {};
-        friend std::ostream& operator<<( std::ostream &output, const Chain_Base & d );
+        friend ostream& operator<<( ostream &output, const Chain_Base & d );
 };
 
 
@@ -41,8 +40,7 @@ class Chain : public virtual Chain_Base{
          */
         Chain(){ 
             chainType = typeid(T).name();
-            if(std::isdigit(chainType.at(0)) ){
-                // std::cout<< "The collected digit is : " << chainType.at(0) << std::endl; // debug purpose
+            if(isdigit(chainType.at(0)) ){
                 chainType =  chainType.substr(1,chainType.size()); // remove the first unexpected digit in the type name
             }
         };
@@ -53,19 +51,17 @@ class Chain : public virtual Chain_Base{
          * @param input 
          * @param cf 
          */
-        Chain(std::istream& input, const CardFactory* cf){
-                std::string line;
+        Chain(istream& input, const CardFactory* cf){
+                string line;
                 Card* card = nullptr;
                 int count = 0;
-                while (std::getline(input, line))
+                while (getline(input, line))
                 {
-                    std::istringstream iss(line);
-                    std::string data;
+                    istringstream iss(line);
+                    string data;
                     if (!(iss >> data)) { 
-                        // std::cout<< "Empty" <<std::endl;
                         continue;
                     } 
-                    // std::cout << data << std::endl; //debug purpose
                     count++;
                     if(data == "B")       card = new Blue;
                     else if(data == "C")  card = new Chili;
@@ -76,7 +72,7 @@ class Chain : public virtual Chain_Base{
                     else if(data == "R")  card = new Red;
                     else if(data == "g")  card = new garden;
                     else {
-                        std::cout << "(Chain Constructor) Check the card name in the file. Value received : " << data << std::endl;
+                        cout << "(Chain Constructor) Check the card name in the file. Value received : " << data << endl;
                         exit(1);
                     }
                     //
@@ -84,7 +80,7 @@ class Chain : public virtual Chain_Base{
 
                 }
 
-                std::cout << "Chain with " << count << " cards initialized from file properly." <<std::endl;
+                cout << "Chain with " << count << " cards initialized from file properly." << endl;
         };
         /**
          * @brief add the card to the chain using the operator+=
@@ -97,12 +93,11 @@ class Chain : public virtual Chain_Base{
             if(getSize() == 0)
                chainType = typeid(card).name();// update the chain type
 
-            // std::cout << "(Chain.h) chainType : " << chainType << std::endl; // debug purpose
             if(typeid(T) == typeid(card) ){
                 chain.push_back(card);
                 return *this;
             } 
-            else throw std::runtime_error("IllegalType");
+            else throw runtime_error("IllegalType");
         };
         /**
          * @brief  counts the number cards in the current chain and returns the number coins 
@@ -112,26 +107,14 @@ class Chain : public virtual Chain_Base{
         */
         int sell(){
             T elem; // initialize a card item to access the method getCardsPerCoin
-            int value = 0;
-            int max_coins = 4;
-            if(chain.size() > 0){
-                // check the coin value;
-                for(int coin = 1;  coin <= max_coins; coin++ ){
-                    if(chain.size() == elem.getCardsPerCoin(coin)){
-                        value  = coin;
-                        break;
-                    }else if (chain.size() < elem.getCardsPerCoin(coin)){
-                        value = coin-1;  // get the lower value for the coin
-                        break;
-                    }
-                }
+            for (int i = 4; i > 0; i--) {
+                if (chain.size() >= elem.getCardsPerCoin(i)) return i;
             }
-            if(value == -1) value = 0; // put it back to zero
-            return value;
+            return 0;
         };
 
 
-        friend std::ostream& operator<<( std::ostream &output, const Chain<Card*> & d );
+        friend ostream& operator<<( ostream &output, const Chain<Card*> & d );
         
 };
 
