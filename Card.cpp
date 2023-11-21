@@ -1,5 +1,4 @@
 #include "Card.h"
-using namespace std;
 
 // Card
 
@@ -14,7 +13,7 @@ Card::~Card() {}
  * 
  * @param name 
  */
-Blue::Blue(std::string name){
+Blue::Blue(string name){
     this->name = name;
 }
 /**
@@ -24,27 +23,13 @@ Blue::Blue(std::string name){
  * @return int 
  */
 int Blue::getCardsPerCoin(int coins){
-    int numCards = -1; // default to -1 : invalid
-    switch (coins)
-    {
-    case 1:
-        numCards = 4;
-        break;
-    case 2:
-        numCards = 6;
-        break;
-    case 3:
-        numCards = 8;
-        break;
-    case 4:
-        numCards = 10;
-        break;
-    default:
+    if (coins < 1 || coins > 4) {
         cout << "(Blue) - Check the value of coins passed getCardsPerCoin. Value received : " << coins << endl;
-        break;
+        return -1;
     }
 
-    return  numCards;
+    const int cardsPerCoin[4] = {4,6,8,10};
+    return cardsPerCoin[coins-1];
 }
 
 /**
@@ -61,7 +46,7 @@ string Blue::getName(){
  * 
  * @param out 
  */
-void Blue::print(std::ostream& out){
+void Blue::print(ostream& out){
     out << this->getName()[0];
 }
 
@@ -70,7 +55,7 @@ void Blue::print(std::ostream& out){
  * 
  * @param name 
  */
-Chili::Chili(std::string name){
+Chili::Chili(string name){
     this->name = name;
 }
 
@@ -91,27 +76,13 @@ string Chili::getName(){
  * @return int 
  */
 int Chili::getCardsPerCoin(int coins){
-    int numCards = -1; // default to -1 : invalid
-    switch (coins)
-    {
-    case 1:
-        numCards = 3;
-        break;
-    case 2:
-        numCards = 6;
-        break;
-    case 3:
-        numCards = 8;
-        break;
-    case 4:
-        numCards = 9;
-        break;
-    default:
+    if (coins < 1 || coins > 4) {
         cout << "(Chili) - Check the value of coins passed getCardsPerCoin. Value received : " << coins << endl;
-        break;
+        return -1;
     }
 
-    return  numCards;
+    const int cardsPerCoin[4] = {3,6,8,9};
+    return cardsPerCoin[coins-1];
 }
 
 /**
@@ -119,7 +90,7 @@ int Chili::getCardsPerCoin(int coins){
  * 
  * @param out 
  */
-void Chili::print(std::ostream& out){
+void Chili::print(ostream& out){
     out << this->getName()[0];
 }
 
@@ -128,7 +99,7 @@ void Chili::print(std::ostream& out){
  * 
  * @param name 
  */
-Stink::Stink(std::string name){
+Stink::Stink(string name){
     this->name = name;
 }
 
@@ -150,27 +121,13 @@ string Stink::getName(){
  * @return int 
  */
 int Stink::getCardsPerCoin(int coins){
-    int numCards = -1; // default to -1 : invalid
-    switch (coins)
-    {
-    case 1:
-        numCards = 3;
-        break;
-    case 2:
-        numCards = 5;
-        break;
-    case 3:
-        numCards = 7;
-        break;
-    case 4:
-        numCards = 8;
-        break;
-    default:
+    if (coins < 1 || coins > 4) {
         cout << "(Stink) - Check the value of coins passed getCardsPerCoin. Value received : " << coins << endl;
-        break;
+        return -1;
     }
 
-    return  numCards;
+    const int cardsPerCoin[4] = {3,5,7,8};
+    return cardsPerCoin[coins-1];
 }
 
 
@@ -179,7 +136,7 @@ int Stink::getCardsPerCoin(int coins){
  * 
  * @param out 
  */
-void Stink::print(std::ostream& out){
+void Stink::print(ostream& out){
     out << this->getName()[0];
 }
 
@@ -189,7 +146,7 @@ void Stink::print(std::ostream& out){
  * 
  * @param name 
  */
-Green::Green(std::string name){
+Green::Green(string name){
     this->name = name;
 }
 
@@ -210,27 +167,13 @@ string Green::getName(){
  * @return int 
  */
 int Green::getCardsPerCoin(int coins){
-    int numCards = -1; // default to -1 : invalid
-    switch (coins)
-    {
-    case 1:
-        numCards = 3;
-        break;
-    case 2:
-        numCards = 5;
-        break;
-    case 3:
-        numCards = 6;
-        break;
-    case 4:
-        numCards = 7;
-        break;
-    default:
+    if (coins < 1 || coins > 4) {
         cout << "(Green) - Check the value of coins passed getCardsPerCoin. Value received : " << coins << endl;
-        break;
+        return -1;
     }
 
-    return  numCards;
+    const int cardsPerCoin[4] = {3,5,6,7};
+    return cardsPerCoin[coins-1];
 }
 
 /**
@@ -238,7 +181,7 @@ int Green::getCardsPerCoin(int coins){
  * 
  * @param out 
  */
-void Green::print(std::ostream& out){
+void Green::print(ostream& out){
     out << this->getName()[0];
 }
 
@@ -248,7 +191,7 @@ void Green::print(std::ostream& out){
  * 
  * @param name 
  */
-soy::soy(std::string name){
+soy::soy(string name){
     this->name = name;
 }
 
@@ -269,27 +212,13 @@ string soy::getName(){
  * @return int 
  */
 int soy::getCardsPerCoin(int coins){
-    int numCards = -1; // default to -1 : invalid
-    switch (coins)
-    {
-    case 1:
-        numCards = 2;
-        break;
-    case 2:
-        numCards = 4;
-        break;
-    case 3:
-        numCards = 6;
-        break;
-    case 4:
-        numCards = 7;
-        break;
-    default:
+    if (coins < 1 || coins > 4) {
         cout << "(soy) - Check the value of coins passed getCardsPerCoin. Value received : " << coins << endl;
-        break;
+        return -1;
     }
 
-    return  numCards;
+    const int cardsPerCoin[4] = {2,4,6,7};
+    return cardsPerCoin[coins-1];
 }
 
 /**
@@ -297,7 +226,7 @@ int soy::getCardsPerCoin(int coins){
  * 
  * @param out 
  */
-void soy::print(std::ostream& out){
+void soy::print(ostream& out){
     out << this->getName()[0];
 }
 
@@ -307,7 +236,7 @@ void soy::print(std::ostream& out){
  * 
  * @param name 
  */
-black::black(std::string name){
+black::black(string name){
     this->name = name;
 }
 
@@ -328,27 +257,13 @@ string black::getName(){
  * @return int 
  */
 int black::getCardsPerCoin(int coins){
-    int numCards = -1; // default to -1 : invalid 
-    switch (coins)
-    {
-    case 1:
-        numCards = 2;
-        break;
-    case 2:
-        numCards = 4;
-        break;
-    case 3:
-        numCards = 5;
-        break;
-    case 4:
-        numCards = 6;
-        break;
-    default:
+    if (coins < 1 || coins > 4) {
         cout << "(black) - Check the value of coins passed getCardsPerCoin. Value received : " << coins << endl;
-        break;
+        return -1;
     }
 
-    return  numCards;
+    const int cardsPerCoin[4] = {2,4,5,6};
+    return cardsPerCoin[coins-1];
 }
 
 /**
@@ -356,7 +271,7 @@ int black::getCardsPerCoin(int coins){
  * 
  * @param out 
  */
-void black::print(std::ostream& out){
+void black::print(ostream& out){
     out << this->getName()[0];
 }
 
@@ -366,7 +281,7 @@ void black::print(std::ostream& out){
  * 
  * @param name 
  */
-Red::Red(std::string name){
+Red::Red(string name){
     this->name = name;
 }
 
@@ -387,27 +302,13 @@ string Red::getName(){
  * @return int 
  */
 int Red::getCardsPerCoin(int coins){
-    int numCards = -1; // default to -1 : invalid
-    switch (coins)
-    {
-    case 1:
-        numCards = 2;
-        break;
-    case 2:
-        numCards = 3;
-        break;
-    case 3:
-        numCards = 4;
-        break;
-    case 4:
-        numCards = 5;
-        break;
-    default:
+    if (coins < 1 || coins > 4) {
         cout << "(Red) - Check the value of coins passed getCardsPerCoin. Value received : " << coins << endl;
-        break;
+        return -1;
     }
 
-    return  numCards;
+    const int cardsPerCoin[4] = {2,3,4,5};
+    return cardsPerCoin[coins-1];
 }
 
 
@@ -416,7 +317,7 @@ int Red::getCardsPerCoin(int coins){
  * 
  * @param out 
  */
-void Red::print(std::ostream& out){
+void Red::print(ostream& out){
     out << this->getName()[0];
 }
 
@@ -425,7 +326,7 @@ void Red::print(std::ostream& out){
  * 
  * @param name 
  */
-garden::garden(std::string name){
+garden::garden(string name){
     this->name = name;
 }
 
@@ -447,27 +348,13 @@ string garden::getName(){
  * @return int 
  */
 int garden::getCardsPerCoin(int coins){
-    int numCards = -1; // default to -1 : invalid
-    switch (coins)
-    {
-    case 1:
-        numCards = 0;
-        break;
-    case 2:
-        numCards = 2;
-        break;
-    case 3:
-        numCards = 3;
-        break;
-    case 4:
-        numCards = 0;
-        break;
-    default:
+    if (coins < 1 || coins > 4) {
         cout << "(garden) - Check the value of coins passed getCardsPerCoin. Value received : " << coins << endl;
-        break;
+        return -1;
     }
 
-    return  numCards;
+    const int cardsPerCoin[4] = {INT_MAX,2,3,INT_MAX};
+    return cardsPerCoin[coins-1];
 }
 
 /**
@@ -475,7 +362,7 @@ int garden::getCardsPerCoin(int coins){
  * 
  * @param out 
  */
-void garden::print(std::ostream& out){
+void garden::print(ostream& out){
    out << this->getName()[0] ;
 }
 
@@ -484,9 +371,9 @@ void garden::print(std::ostream& out){
  * 
  * @param out 
  * @param card 
- * @return std::ostream& 
+ * @return ostream& 
  */
-std::ostream& operator<<(std::ostream& out, Card& card) 
+ostream& operator<<(ostream& out, Card& card) 
 { 
     card.print(out);
     return out; 
@@ -498,6 +385,6 @@ std::ostream& operator<<(std::ostream& out, Card& card)
  * 
  * @param filename 
  */
-void Card::saveCard(std::ofstream& filename){
+void Card::saveCard(ofstream& filename){
     filename << *this;
 }
