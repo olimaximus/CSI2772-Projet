@@ -16,7 +16,7 @@ class Player{
     vector<Chain_Base*> pChains; // player chains
     int pCoins;  // number of coins held by the player
     const int MAX_NUM_CHAINS;
-    const int ALLOWED_CHAINS;
+    int ALLOWED_CHAINS;
     public:
         /**
          * @brief Construct a new Player object

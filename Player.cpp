@@ -94,15 +94,7 @@ Card* Player::playCard(Card* input, bool specified_input){
                     if(user_input[0] == 'y'){
                         // buy a third chain
                         buyThirdChain();
-                        // add the card inside the newly bought chain
-                        for(Chain_Base* chain : pChains){
-                            if(chain->getChainType() == card -> getName()){
-                                new_chain = chain;
-                                card = pHand -> play();
-                                *new_chain += card;
-                                break;
-                            }
-                        }
+                        startNewChain(new_chain, card, specified_input);
                     }
                     else{
                         sellChain();
@@ -125,7 +117,7 @@ Card* Player::playCard(Card* input, bool specified_input){
  * @return int 
  */
 int Player::getMaxNumChains(){
-    return MAX_NUM_CHAINS;
+    return ALLOWED_CHAINS;
 }
 
 
@@ -150,28 +142,11 @@ then an exception NotEnoughCoins is thrown
  * 
  */
 void Player::buyThirdChain(){
-    Card* card = nullptr;
     if( pCoins >= 3 ){
         if(pChains.size() < MAX_NUM_CHAINS){
             pCoins -= 3;
-            card = pHand->top();
-            Chain_Base* new_chain;
-            if(card->getName() == "Blue") new_chain = new Chain<Blue>;
-            else if(card->getName() == "Chili") new_chain = new Chain<Chili>;
-            else if(card->getName() == "Stink") new_chain = new Chain<Stink>;
-            else if(card->getName() == "Green") new_chain = new Chain<Green>;
-            else if(card->getName() == "soy")   new_chain = new Chain<soy>;
-            else if(card->getName() == "black") new_chain = new Chain<black>;
-            else if(card->getName() == "Red")   new_chain = new Chain<Red>;
-            else if(card->getName() == "garden")new_chain = new Chain<garden>;
-            else {
-                cout << "(playCard) Check the card name. Value received : " << card->getName() << endl;
-                new_chain = nullptr; 
-                exit(1);
-                
-            }
-            *new_chain += card;
-            pChains.push_back(new_chain);
+            ALLOWED_CHAINS = 3;
+            
         }else{
             cout << "A new chain can not be bought. The maximum number ["<< pChains.size() << "] of chains have been reached. " << endl;
         }
