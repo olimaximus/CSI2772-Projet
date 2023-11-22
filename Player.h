@@ -7,11 +7,13 @@
 #include "Hand.h"
 #include "Chain.h"
 
+using namespace std;
+
 
 class Player{
-    std::string pName; // player name
+    string pName; // player name
     Hand* pHand; // player hand
-    std::vector<Chain_Base*> pChains; // player chains
+    vector<Chain_Base*> pChains; // player chains
     int pCoins;  // number of coins held by the player
     const int MAX_NUM_CHAINS;
     const int ALLOWED_CHAINS;
@@ -21,7 +23,7 @@ class Player{
          * 
          * @param name 
          */
-        Player(std::string& name): MAX_NUM_CHAINS(3), ALLOWED_CHAINS(2){
+        Player(string& name): MAX_NUM_CHAINS(3), ALLOWED_CHAINS(2){
             pName = name;
             pCoins = 0;
             pHand = new Hand();
@@ -32,9 +34,9 @@ class Player{
          * @param input 
          * @param cf 
          */
-        Player(std::istream& input, const CardFactory* cf): MAX_NUM_CHAINS(3), ALLOWED_CHAINS(2){
-            std::string line;
-            std::string chainType;
+        Player(istream& input, const CardFactory* cf): MAX_NUM_CHAINS(3), ALLOWED_CHAINS(2){
+            string line;
+            string chainType;
             Card* card = nullptr;
             pHand = new Hand();
             int  chain_idx = -1; // keep track of the idx of the chain being added from the text file
@@ -45,12 +47,11 @@ class Player{
             bool chainsInitialized = false;
             bool chainTypeInitialized = false;
             
-            while (std::getline(input, line))
+            while (getline(input, line))
             {
-                std::istringstream iss(line);
-                std::string data;
+                istringstream iss(line);
+                string data;
                 if (!(iss >> data)) { 
-                    // std::cout<< "Empty" <<std::endl;
                     continue;
                 } 
                 // get the name on the first line of the file
@@ -75,7 +76,6 @@ class Player{
                         continue;
                     } 
                     else{
-                        // std::cout << data << std::endl; //debug purpose
                         count++;
                         if(data == "B")       card = new Blue;
                         else if(data == "C")  card = new Chili;
@@ -86,7 +86,7 @@ class Player{
                         else if(data == "R")  card = new Red;
                         else if(data == "g")  card = new garden;
                         else {
-                            std::cout << "(Player Constructor) Check the card name in the file. Value received : " << data << std::endl;
+                            cout << "(Player Constructor) Check the card name in the file. Value received : " << data << endl;
                             exit(1);
                         }
                       //
@@ -121,7 +121,7 @@ class Player{
                              else if(chainType == "Red")   new_chain = new Chain<Red>;
                              else if(chainType == "garden")new_chain = new Chain<garden>;
                              else {
-                                    std::cout << "(Player Constructor) Check the chain type. Value received : " << chainType << std::endl;
+                                    cout << "(Player Constructor) Check the chain type. Value received : " << chainType << endl;
                                     new_chain = nullptr; 
                                     exit(1);
                              }
@@ -144,13 +144,13 @@ class Player{
                               else if(data == "R")  card = new Red;
                               else if(data == "g")  card = new garden;
                               else {
-                                  std::cout << "(Player Constructor) Check the card name in the file. Value received : " << data << std::endl;
+                                  cout << "(Player Constructor) Check the card name in the file. Value received : " << data << endl;
                                   exit(1);
                               }
                               if(chain_idx != -1 && card != nullptr){
                                   *(pChains.at(chain_idx))+=card;
                               }else{
-                                  std::cout << "(Player Constructor) No chain has been added so far. chain_idx : " << chain_idx << std::endl;
+                                  cout << "(Player Constructor) No chain has been added so far. chain_idx : " << chain_idx << endl;
                               }
                             
                           }
@@ -159,7 +159,7 @@ class Player{
                 }// end of if
             }// end of while loop
 
-            std::cout << "Player initialized from file properly." <<std::endl;
+            cout << "Player initialized from file properly." <<endl;
         };
         
         /**
@@ -194,13 +194,13 @@ class Player{
         void takeCard(Card*); 
         Card* playCard(Card* input = nullptr, bool specified_input = false);     
         Card* removeCard(int = 0); 
-        std::string getName();
+        string getName();
         int getNumCoins();
         int getMaxNumChains();
         int getNumChains();
         int getNumCards(); // get the number of cards inside the hand
         Hand* getHand();
-        std::vector<Chain_Base*>* getChains();
+        vector<Chain_Base*>* getChains();
         void buyThirdChain();
         void sellChain();
         void startNewChain(Chain_Base* new_chain, Card* card, bool specified_input);
@@ -211,18 +211,18 @@ class Player{
          * @param output 
          * @param in 
          */
-        void printHand(std::ostream& output, bool in){
+        void printHand(ostream& output, bool in){
             if(!in){
-                output << pHand->top()->getName()[0] << std::endl;
+                output << pHand->top()->getName()[0] << endl;
             }else{
                 for(int i = 0; i < pHand->numCards(); i++){
                     output << pHand->getCard(i)->getName()[0] << " ";
                 }
-                output << std::endl;
+                output << endl;
             }
         };
         
-        friend std::ostream& operator<<(std::ostream&,  const Player& );
+        friend ostream& operator<<(ostream&,  const Player& );
         void savePlayer(int p_id);
         void checkEndedChains();
         

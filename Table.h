@@ -7,6 +7,8 @@
 #include "TradeArea.h"
 #include  "CardFactory.h"
 
+using namespace std;
+
 class Table{
     Player* p1;
     Player* p2;
@@ -48,9 +50,9 @@ class Table{
             delete deck;
             delete cf;
         }
-        bool win(std::string&);
+        bool win(string&);
         void printHand(bool);
-        friend std::ostream& operator<<(std::ostream&,  const Table&);
+        friend ostream& operator<<(ostream&,  const Table&);
         void saveTable();
         void reloadPlayer(int);
         void reloadDeck();

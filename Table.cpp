@@ -9,7 +9,7 @@ returned by reference (in the argument).
  * @return true 
  * @return false 
  */
-bool Table::win(std::string& pName){
+bool Table::win(string& pName){
     bool win = false;
     if(deck->size() == 0){
       
@@ -19,8 +19,8 @@ bool Table::win(std::string& pName){
        else if(p1 ->getNumCoins() < p2->getNumCoins()){
            pName = p2->getName();
        }
-       else{ //  equality
-           pName = "Equality";
+       else{ //  tie
+           pName = "Tie";
        }
 
        win = true;
@@ -36,7 +36,7 @@ of the player's hand (with argument true).
  */
 void Table::printHand(bool in){
      Player* current = currentPlayer == 0 ? p1 : p2; // get the current player
-     current -> printHand(std::cout, in);
+     current -> printHand(cout, in);
 }
 
 /**
@@ -57,15 +57,15 @@ Player* Table::getPlayer(int id){
  * 
  * @param output 
  * @param tb 
- * @return std::ostream 
+ * @return ostream 
  */
-std::ostream& operator<<( std::ostream& output,  const Table&  tb){
+ostream& operator<<( ostream& output,  const Table&  tb){
 
-    output << "> Player 1 : " << std::endl << std::endl << *(tb.p1) << std::endl;
-    output << "> Player 2 : " << std::endl << std::endl << *(tb.p2) << std::endl;
-    output << "> Discard Pile (Top) : "  << *tb.dp << std::endl << std::endl;
-    output << "> Trade Area : "  << *tb.tradeAr << std::endl;
-    output << "_______________________" << std::endl;
+    output << "> Player 1 : " << endl << endl << *(tb.p1) << endl;
+    output << "> Player 2 : " << endl << endl << *(tb.p2) << endl;
+    output << "> Discard Pile (Top) : "  << *tb.dp << endl << endl;
+    output << "> Trade Area : "  << *tb.tradeAr << endl;
+    output << "_______________________" << endl;
     return output;
 };
 
@@ -77,18 +77,17 @@ std::ostream& operator<<( std::ostream& output,  const Table&  tb){
  */
 void Table::saveTable(){
     
-    std::ofstream file;
+    ofstream file;
 
-    file.open("Saved-Deck.txt", std::ios::trunc);
+    file.open("Saved-Deck.txt", ios::trunc);
     deck->saveDeck(file);
-
     file.close();
 
-    file.open("Saved-DiscardPile.txt", std::ios::trunc);
+    file.open("Saved-DiscardPile.txt", ios::trunc);
     dp->saveDiscardPile(file);
     file.close();
 
-    file.open("Saved-TradeArea.txt", std::ios::trunc);
+    file.open("Saved-TradeArea.txt", ios::trunc);
     tradeAr->saveTradeArea(file);
     file.close();
 
@@ -104,10 +103,10 @@ void Table::saveTable(){
  * @param p_id 
  */
 void Table::reloadPlayer(int p_id){
-    std::ifstream file;
+    ifstream file;
     char id[2];
     sprintf(id, "%d", p_id);
-    std::string filename ="Saved-P"+std::string(id)+".txt";
+    string filename ="Saved-P"+string(id)+".txt";
     file.open(filename);
     if(file.is_open()){
         if(p_id == 1){
@@ -127,13 +126,13 @@ void Table::reloadPlayer(int p_id){
  * 
  */
 void Table::reloadDeck(){
-    std::ifstream deckFile("Saved-Deck.txt"); // add this in table ?
+    ifstream deckFile("Saved-Deck.txt"); // add this in table ?
     if(deckFile.is_open()){
         deck = new Deck(deckFile,cf);
     }else{
         // file not found
         deck =  cf -> getDeck();
-        std::cout << "Saved-Deck.txt not found. The deck has been generated from the CardFactory." << std::endl;
+        cout << "Saved-Deck.txt not found. The deck has been generated from the CardFactory." << endl;
     }
 }
 
@@ -142,13 +141,13 @@ void Table::reloadDeck(){
  * 
  */
 void Table::reloadDiscardPile(){
-    std::ifstream dpFile("Saved-DiscardPile.txt"); // add this in table ?
+    ifstream dpFile("Saved-DiscardPile.txt");
     if(dpFile.is_open()){
         dp = new DiscardPile(dpFile,cf);
     }else{
         // file not found
         dp =  new DiscardPile;
-        std::cout << "Saved-DiscardPile.txt not found. Using empty discard pile." << std::endl;
+        cout << "Saved-DiscardPile.txt not found. Using empty discard pile." << endl;
     }
 }
 
@@ -158,13 +157,13 @@ void Table::reloadDiscardPile(){
  * 
  */
 void Table::reloadTradeArea(){
-    std::ifstream trArFile("Saved-TradeArea.txt"); // add this in table ?
+    ifstream trArFile("Saved-TradeArea.txt");
     if(trArFile.is_open()){
         tradeAr = new TradeArea(trArFile,cf);
     }else{
         // file not found
         tradeAr =  new TradeArea;
-        std::cout << "Saved-TradeArea.txt not found. Using empty trade area." << std::endl;
+        cout << "Saved-TradeArea.txt not found. Using empty trade area." << endl;
     }
 }
 

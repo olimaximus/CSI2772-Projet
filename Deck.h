@@ -7,36 +7,37 @@
 #ifndef DECK_H
 #define DECK_H
 
-// #include "CardFactory.h"
 #include "Card.h"
+
+using namespace std;
 
 class CardFactory;
 
-class Deck: public std::vector<Card*>{
+class Deck: public vector<Card*>{
      public :
         /**
          * @brief Construct a new Deck object
          * 
          */
-        Deck(): std::vector<Card*>(){};
+        Deck(): vector<Card*>(){};
         /**
          * @brief Construct a new Deck object from an istream
          * 
          * @param input 
          * @param cf 
          */
-        Deck(std::istream& input, const CardFactory* cf): std::vector<Card*>(){
-            std::string line;
+        Deck(istream& input, const CardFactory* cf): vector<Card*>(){
+            string line;
             Card* card = nullptr;
             int count = 0;
-            while (std::getline(input, line))
+            while (getline(input, line))
             {
-                std::istringstream iss(line);
-                std::string data;
+                istringstream iss(line);
+                string data;
                 if (!(iss >> data)) { 
                     continue;
                 } 
-                // std::cout << data << std::endl; //debug purpose
+
                 count++;
                 if(data == "B")       card = new Blue;
                 else if(data == "C")  card = new Chili;
@@ -47,7 +48,7 @@ class Deck: public std::vector<Card*>{
                 else if(data == "R")  card = new Red;
                 else if(data == "g")  card = new garden;
                 else {
-                    std::cout << "(Deck Constructor) Check the card name in the file. Value received : " << data << std::endl;
+                    cout << "(Deck Constructor) Check the card name in the file. Value received : " << data << endl;
                     exit(1);
                 }
                 //
@@ -55,7 +56,7 @@ class Deck: public std::vector<Card*>{
 
             }
 
-            std::cout << "Deck with " << count << " cards initialized from file properly." <<std::endl;
+            cout << "Deck with " << count << " cards initialized from file properly." << endl;
 
         };
         /**
@@ -70,7 +71,7 @@ class Deck: public std::vector<Card*>{
             for(int i = 0; i < 104; i++){
                 this->push_back(d.at(i));
             }
-            std::cout << "Deck of size("<<d.size()<<") copied."<<std::endl;
+            cout << "Deck of size("<<d.size()<<") copied."<< endl;
         }
            
         /**
@@ -79,16 +80,15 @@ class Deck: public std::vector<Card*>{
          */
         ~Deck(){
             for(int i = 0; i < this->size(); i++){
-                // std::cout << "deleting i = " << i << "; name = " << this->at(i)->getName() << std::endl; // DEBUG PURPOSE
                 delete this->at(i);
             }
-            std::cout << "Deck of size("<<this->size()<<") destroyed."<<std::endl;
+            cout << "Deck of size("<<this->size()<<") destroyed."<< endl;
         };
 
         Card* draw();
         Deck& operator=(const Deck&);
-        friend std::ostream& operator<<( std::ostream &output, const Deck& d );
-        void saveDeck(std::ofstream& filename);
+        friend ostream& operator<<( ostream &output, const Deck& d );
+        void saveDeck(ofstream& filename);
 };
 
 #endif

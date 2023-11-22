@@ -38,9 +38,9 @@ int Hand::numCards(){
 Card* Hand::getCard(int pos){
     Card* card = nullptr; // removed card to return
     if(pos > pHand.size()-1){
-        std::cout << "(getCard) The index "  << pos << " can not be used. Current size of the hand = " << pHand.size() << std::endl;
+        cout << "(getCard) The index "  << pos << " can not be used. Current size of the hand = " << pHand.size() << endl;
     }else{
-        std::queue <Card*, std::list<Card*>> temp; // temp player hand
+        queue <Card*, list<Card*>> temp; // temp player hand
         Card* temp_card = nullptr;  // temp card
         int find_idx = 0;
         while(!pHand.empty()){
@@ -74,12 +74,12 @@ Card* Hand::getCard(int pos){
  * 
  * @param output 
  * @param hand 
- * @return std::ostream& 
+ * @return ostream& 
  */
-std::ostream& operator<<( std::ostream& output, Hand& hand){
+ostream& operator<<( ostream& output, Hand& hand){
 
     for( int pos = 0; pos < hand.numCards() ; pos++ ){
-        output << hand.getCard(pos) << std::endl;
+        output << hand.getCard(pos) << endl;
     }
     return output;
 };
@@ -90,16 +90,16 @@ std::ostream& operator<<( std::ostream& output, Hand& hand){
  * @brief write the card inside a file
  * 
  */
-void Hand::saveHand(std::ofstream& filename){
+void Hand::saveHand(ofstream& filename){
 
     Card* card = nullptr; // removed card to return
-    std::queue <Card*, std::list<Card*>> temp; // temp player hand
+    queue <Card*, list<Card*>> temp; // temp player hand
     Card* temp_card = nullptr;  // temp card
     int find_idx = 0;
     while(!pHand.empty()){
         temp_card = pHand.front(); // get the card
         temp_card -> saveCard(filename);
-        filename << std::endl;
+        filename << endl;
         pHand.pop();     // add it in the temporary queue
         temp.push(temp_card); // add the card in the queue
     }
@@ -113,14 +113,14 @@ void Hand::saveHand(std::ofstream& filename){
         
     }
 
-    std::cout << "Hand saved." << std::endl;
+    cout << "Hand saved." << endl;
 }
 
 /**
  * @brief Get the List Of Cards inside the hand
  * 
- * @return std::queue <Card*, std::list<Card*>> 
+ * @return queue <Card*, list<Card*>> 
  */
-std::queue <Card*, std::list<Card*>> * Hand::getListOfCards(){
+queue <Card*, list<Card*>> * Hand::getListOfCards(){
     return &pHand;
 }

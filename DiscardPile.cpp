@@ -27,7 +27,7 @@ Card* DiscardPile::top(){
  * 
  * @param os 
  */
-void  DiscardPile::print(std::ostream& os){
+void  DiscardPile::print(ostream& os){
 
     for(int i = 0; i < this->size(); i++){
         os << this->at(i)->getName()[0]<< " ";
@@ -41,9 +41,9 @@ void  DiscardPile::print(std::ostream& os){
  * 
  * @param output 
  * @param dp 
- * @return std::ostream& 
+ * @return ostream& 
  */
-std::ostream& operator<<( std::ostream &output, const DiscardPile& dp ){
+ostream& operator<<( ostream &output, const DiscardPile& dp ){
 
     if(dp.size() > 0)
        (dp.back())->print(output);
@@ -58,10 +58,10 @@ std::ostream& operator<<( std::ostream &output, const DiscardPile& dp ){
  * 
  * @param filename 
  */
-void DiscardPile::saveDiscardPile(std::ofstream& filename){
+void DiscardPile::saveDiscardPile(ofstream& filename){
     for(int i = 0;  i < this->size() ; i++){
         this->at(i)->saveCard(filename);
-        filename << std::endl;
+        filename << endl;
     }
-    std::cout << "Discard Pile saved." << std::endl;
+    cout << "Discard Pile saved." << endl;
 }

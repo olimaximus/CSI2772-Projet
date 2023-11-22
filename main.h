@@ -16,6 +16,4 @@
 #include "Table.h"
 #include "TradeArea.h"
 
-
-
-
+using namespace std;

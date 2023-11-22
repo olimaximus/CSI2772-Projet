@@ -8,11 +8,13 @@
 #include <sstream>
 #include <cstdlib>
 
+using namespace std;
+
 class CardFactory;
 
 class Hand{
     private:
-        std::queue <Card*, std::list<Card*>> pHand; // player hand
+        queue <Card*, list<Card*>> pHand; // player hand
         // empty the queue pHand
         void clearHand(){
             while(!pHand.empty()){
@@ -31,19 +33,18 @@ class Hand{
          * @param input 
          * @param cf 
          */
-        Hand(std::istream& input, const CardFactory* cf){
-            std::string line;
+        Hand(istream& input, const CardFactory* cf){
+            string line;
             Card* card = nullptr;
             int count = 0;
-            while (std::getline(input, line))
+            while (getline(input, line))
             {
-                std::istringstream iss(line);
-                std::string data;
+                istringstream iss(line);
+                string data;
                 if (!(iss >> data)) { 
-                    // std::cout<< "Empty" <<std::endl;
                     continue;
                 } // error
-                // std::cout << data << std::endl; //debug purpose
+
                 count++;
                 if(data == "B")       card = new Blue;
                 else if(data == "C")  card = new Chili;
@@ -54,15 +55,15 @@ class Hand{
                 else if(data == "R")  card = new Red;
                 else if(data == "g")  card = new garden;
                 else {
-                    std::cout << "(Hand Constructor) Check the card name in the file. Value received : " << data << std::endl;
+                    cout << "(Hand Constructor) Check the card name in the file. Value received : " << data << endl;
                     exit(1);
                 }
-                //
+
                 if(card != nullptr) pHand.push(card);
 
             }
 
-            std::cout << "Hand with " << count << " cards initialized from file properly." <<std::endl;
+            cout << "Hand with " << count << " cards initialized from file properly." <<endl;
 
         };
         /**
@@ -78,7 +79,7 @@ class Hand{
         Card* play();
         Card* top();
         Card* getCard(int pos);
-        std::queue <Card*, std::list<Card*>>* getListOfCards();
+        queue <Card*, list<Card*>>* getListOfCards();
         /**
          * @brief  returns and removes the Card at a given index
          * 
@@ -87,7 +88,7 @@ class Hand{
          */
         Card* operator[](int pos){
             Card* card = nullptr; // removed card to return
-            std::queue <Card*, std::list<Card*>> temp; // temp player hand
+            queue <Card*, list<Card*>> temp; // temp player hand
             Card* temp_card = nullptr;  // temp card
             int find_idx = 0;
             while(!pHand.empty()){
@@ -115,8 +116,8 @@ class Hand{
             return card;  
         };
         int numCards();
-        friend std::ostream& operator<<( std::ostream&,  Hand& );
-        void saveHand(std::ofstream& filename);
+        friend ostream& operator<<( ostream&,  Hand& );
+        void saveHand(ofstream& filename);
 
 };
 

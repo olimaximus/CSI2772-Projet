@@ -1,5 +1,4 @@
 #include "Deck.h"
-using namespace std;
 
 /**
  * @brief returns and removes the top card from the deck
@@ -46,12 +45,12 @@ ostream& operator<<( ostream& output, const Deck& d ){
  * 
  * @param filename 
  */
-void Deck::saveDeck(std::ofstream& filename){
+void Deck::saveDeck(ofstream& filename){
     for(int i = 0;  i < this->size() ; i++){
         this->at(i)->saveCard(filename);
-        filename << std::endl;
+        filename << endl;
     }
-    std::cout << "Deck saved." << std::endl;
+    cout << "Deck saved." << endl;
 }
 
 

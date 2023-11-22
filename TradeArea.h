@@ -6,11 +6,13 @@
 #include <sstream>
 #include <cstdlib>
 
+using namespace std;
+
 
 class CardFactory;
 
 class TradeArea{
-     std::list<Card*> tradeAr; 
+     list<Card*> tradeAr; 
      const int MAX_CARDS;
      public:
         /**
@@ -24,19 +26,19 @@ class TradeArea{
          * @param input 
          * @param cf 
          */
-        TradeArea(std::istream& input, const CardFactory* cf):MAX_CARDS(3){
-            std::string line;
+        TradeArea(istream& input, const CardFactory* cf):MAX_CARDS(3){
+            string line;
             Card* card = nullptr;
             int count = 0;
-            while (std::getline(input, line))
+            while (getline(input, line))
             {
-                std::istringstream iss(line);
-                std::string data;
+                istringstream iss(line);
+                string data;
                 if (!(iss >> data)) { 
-                    // std::cout<< "Empty" <<std::endl;
+
                     continue;
                 } 
-                // std::cout << data << std::endl; //debug purpose
+
                 count++;
                 if(data == "B")       card = new Blue;
                 else if(data == "C")  card = new Chili;
@@ -47,7 +49,7 @@ class TradeArea{
                 else if(data == "R")  card = new Red;
                 else if(data == "g")  card = new garden;
                 else {
-                    std::cout << "(TradeArea Constructor) Check the card name in the file. Value received : " << data << std::endl;
+                    cout << "(TradeArea Constructor) Check the card name in the file. Value received : " << data << endl;
                     exit(1);
                 }
                 //
@@ -55,7 +57,7 @@ class TradeArea{
 
             }
 
-            std::cout << "TradeArea with " << count << " cards initialized from file properly." <<std::endl;
+            cout << "TradeArea with " << count << " cards initialized from file properly." << endl;
         };
         /**
          * @brief add a card inside the trade area
@@ -70,17 +72,17 @@ class TradeArea{
                  if(tradeAr.size() < 3){
                      tradeAr.push_back(card);
                  }else{
-                     std::cout<< "The card [" << card->getName() << "] can not be added to the Trade Area." << std::endl;
+                     cout<< "The card [" << card->getName() << "] can not be added to the Trade Area." << endl;
                  }
              }
              return *this;
         };
         bool legal(Card*);
-        Card* trade(std::string);
+        Card* trade(string);
         int numCards();
-        friend std::ostream& operator<<( std::ostream&, const TradeArea&  );
-        void saveTradeArea(std::ofstream& filename);
-        std::list<Card*> getListOfCards();
+        friend ostream& operator<<( ostream&, const TradeArea&  );
+        void saveTradeArea(ofstream& filename);
+        list<Card*> getListOfCards();
 
 };
 

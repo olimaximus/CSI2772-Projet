@@ -9,15 +9,18 @@
 #define DISCARD_PILE_H
 
 #include "Card.h"
+
+using namespace std;
+
 class CardFactory;
 
-class DiscardPile:  public std::vector<Card*>{
+class DiscardPile:  public vector<Card*>{
     public:
         /**
          * @brief Construct a new Discard Pile object
          * 
          */
-        DiscardPile(): std::vector<Card*>(){};
+        DiscardPile(): vector<Card*>(){};
 
         /**
          * @brief Construct a new Discard Pile object from an istream
@@ -25,18 +28,18 @@ class DiscardPile:  public std::vector<Card*>{
          * @param input 
          * @param cf 
          */
-        DiscardPile(std::istream& input, const CardFactory* cf): std::vector<Card*>(){
-            std::string line;
+        DiscardPile(istream& input, const CardFactory* cf): vector<Card*>(){
+            string line;
             Card* card = nullptr;
             int count = 0;
-            while (std::getline(input, line))
+            while (getline(input, line))
             {
-                std::istringstream iss(line);
-                std::string data;
+                istringstream iss(line);
+                string data;
                 if (!(iss >> data)) { 
                     continue;
-                } 
-                // std::cout << data << std::endl; //debug purpose
+                }
+
                 count++;
                 if(data == "B")       card = new Blue;
                 else if(data == "C")  card = new Chili;
@@ -47,7 +50,7 @@ class DiscardPile:  public std::vector<Card*>{
                 else if(data == "R")  card = new Red;
                 else if(data == "g")  card = new garden;
                 else {
-                    std::cout << "(DiscardPile Constructor) Check the card name in the file. Value received : " << data << std::endl;
+                    cout << "(DiscardPile Constructor) Check the card name in the file. Value received : " << data << endl;
                     exit(1);
                 }
                 //
@@ -55,7 +58,7 @@ class DiscardPile:  public std::vector<Card*>{
 
             }
 
-            std::cout << "DiscardPile with " << count << " cards initialized from file properly." <<std::endl;
+            cout << "DiscardPile with " << count << " cards initialized from file properly." << endl;
 
         };
 
@@ -71,9 +74,9 @@ class DiscardPile:  public std::vector<Card*>{
         };
         Card* pickUp();
         Card* top();
-        void print(std::ostream&);
-        friend std::ostream& operator<<( std::ostream &output, const DiscardPile& dp );
-        void saveDiscardPile(std::ofstream& filename);
+        void print(ostream&);
+        friend ostream& operator<<( ostream &output, const DiscardPile& dp );
+        void saveDiscardPile(ofstream& filename);
 
 };
 

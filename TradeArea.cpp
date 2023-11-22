@@ -11,7 +11,7 @@ card of the same bean is already in the TradeArea.
 bool TradeArea::legal (Card* card){
 
     bool found = false;
-    std::list<Card*>::iterator i;
+    list<Card*>::iterator i;
     for( i = tradeAr.begin(); i != tradeAr.end(); i++){
         if( (*i)->getName() == card->getName()) found = true;
     }
@@ -26,10 +26,10 @@ bool TradeArea::legal (Card* card){
  * @param card 
  * @return Card* 
  */
-Card* TradeArea::trade (std::string card){
+Card* TradeArea::trade (string card){
 
     Card* cardFound;
-    std::list<Card*>::iterator i;
+    list<Card*>::iterator i;
 
     for(i = tradeAr.begin(); i != tradeAr.end(); i++){
         if( (*i)->getName() == card){
@@ -55,9 +55,9 @@ int TradeArea::numCards(){ return tradeAr.size(); }
  * 
  * @param output 
  * @param tr_arr 
- * @return std::ostream 
+ * @return ostream 
  */
-std::ostream& operator<<(std::ostream& output, const TradeArea& tr_arr){
+ostream& operator<<(ostream& output, const TradeArea& tr_arr){
 
     for(auto card : tr_arr.tradeAr){
         output << card->getName()[0] << " ";
@@ -72,20 +72,20 @@ std::ostream& operator<<(std::ostream& output, const TradeArea& tr_arr){
  * 
  * @param filename 
  */
-void TradeArea::saveTradeArea(std::ofstream& filename){
+void TradeArea::saveTradeArea(ofstream& filename){
     for(auto card: tradeAr){
         card->saveCard(filename);
-        filename<<std::endl;
+        filename<<endl;
     }
 
-    std::cout << "TradeArea saved." << std::endl;
+    cout << "TradeArea saved." << endl;
 }
 
 /**
  * @brief return the trade area list of cards
  * 
- * @return std::list<Card*> 
+ * @return list<Card*> 
  */
-std::list<Card*> TradeArea::getListOfCards(){
+list<Card*> TradeArea::getListOfCards(){
     return tradeAr;
 }
