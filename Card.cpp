@@ -3,13 +3,13 @@
 // Card
 
 /**
- * @brief Destroy the Card:: Card object
+ * @brief Destructeur de Card
  * 
  */
 Card::~Card() {}
 
 /**
- * @brief Construct a new Blue:: Blue object
+ * @brief Constructeur de Blue
  * 
  * @param name 
  */
@@ -17,14 +17,14 @@ Blue::Blue(string name){
     this->name = name;
 }
 /**
- * @brief retourne le nombre de cartes qui correspond au nombre de piece
+ * @brief retourne le nombre de cartes qui correspond au nombre de pieces en entrée
  * 
  * @param coins 
  * @return int 
  */
 int Blue::getCardsPerCoin(int coins){
     if (coins < 1 || coins > 4) {
-        cout << "(Blue) - Check the value of coins passed getCardsPerCoin. Value received : " << coins << endl;
+        cout << "(Blue) - Impossible value of coins passed to getCardsPerCoin : " << coins << endl;
         return -1;
     }
 
@@ -42,7 +42,7 @@ string Blue::getName(){
 }
 
 /**
- * @brief display the first letter of the card name
+ * @brief imprimer la première lettre de la carte
  * 
  * @param out 
  */
@@ -51,7 +51,7 @@ void Blue::print(ostream& out){
 }
 
 /**
- * @brief Construct a new Chili:: Chili object
+ * @brief Constructeur de Chili
  * 
  * @param name 
  */
@@ -70,14 +70,14 @@ string Chili::getName(){
 }
 
 /**
- * @brief retourne le nombre de cartes qui correspond au nombre de piece
+ * @brief retourne le nombre de cartes qui correspond au nombre de pieces en entrée
  * 
  * @param coins 
  * @return int 
  */
 int Chili::getCardsPerCoin(int coins){
     if (coins < 1 || coins > 4) {
-        cout << "(Chili) - Check the value of coins passed getCardsPerCoin. Value received : " << coins << endl;
+        cout << "(Chili) - Impossible value of coins passed to getCardsPerCoin : " << coins << endl;
         return -1;
     }
 
@@ -86,7 +86,7 @@ int Chili::getCardsPerCoin(int coins){
 }
 
 /**
- * @brief display the first letter of the card name
+ * @brief imprimer la première lettre de la carte
  * 
  * @param out 
  */
@@ -95,7 +95,7 @@ void Chili::print(ostream& out){
 }
 
 /**
- * @brief Construct a new Stink:: Stink object
+ * @brief Constructeur de Stink
  * 
  * @param name 
  */
@@ -115,14 +115,14 @@ string Stink::getName(){
 
 
 /**
- * @brief retourne le nombre de cartes qui correspond au nombre de piece
+ * @brief retourne le nombre de cartes qui correspond au nombre de pieces en entrée
  * 
  * @param coins 
  * @return int 
  */
 int Stink::getCardsPerCoin(int coins){
     if (coins < 1 || coins > 4) {
-        cout << "(Stink) - Check the value of coins passed getCardsPerCoin. Value received : " << coins << endl;
+        cout << "(Stink) - Impossible value of coins passed to getCardsPerCoin : " << coins << endl;
         return -1;
     }
 
@@ -132,7 +132,7 @@ int Stink::getCardsPerCoin(int coins){
 
 
 /**
- * @brief display the first letter of the card name
+ * @brief imprimer la première lettre de la carte
  * 
  * @param out 
  */
@@ -142,7 +142,7 @@ void Stink::print(ostream& out){
 
 // Green
 /**
- * @brief Construct a new Green:: Green object
+ * @brief Constructeur de Green
  * 
  * @param name 
  */
@@ -161,14 +161,14 @@ string Green::getName(){
 }
 
 /**
- * @brief retourne le nombre de cartes qui correspond au nombre de piece
+ * @brief retourne le nombre de cartes qui correspond au nombre de pieces en entrée
  * 
  * @param coins 
  * @return int 
  */
 int Green::getCardsPerCoin(int coins){
     if (coins < 1 || coins > 4) {
-        cout << "(Green) - Check the value of coins passed getCardsPerCoin. Value received : " << coins << endl;
+        cout << "(Green) - Impossible value of coins passed to getCardsPerCoin : " << coins << endl;
         return -1;
     }
 
@@ -177,7 +177,7 @@ int Green::getCardsPerCoin(int coins){
 }
 
 /**
- * @brief display the first letter of the card name
+ * @brief imprimer la première lettre de la carte
  * 
  * @param out 
  */
@@ -187,7 +187,7 @@ void Green::print(ostream& out){
 
 // soy
 /**
- * @brief Construct a new soy::soy object
+ * @brief Constructeur de soy
  * 
  * @param name 
  */
@@ -206,14 +206,14 @@ string soy::getName(){
 }
 
 /**
- * @brief retourne le nombre de cartes qui correspond au nombre de piece
+ * @brief retourne le nombre de cartes qui correspond au nombre de pieces en entrée
  * 
  * @param coins 
  * @return int 
  */
 int soy::getCardsPerCoin(int coins){
     if (coins < 1 || coins > 4) {
-        cout << "(soy) - Check the value of coins passed getCardsPerCoin. Value received : " << coins << endl;
+        cout << "(soy) - Impossible value of coins passed to getCardsPerCoin : " << coins << endl;
         return -1;
     }
 
@@ -222,7 +222,7 @@ int soy::getCardsPerCoin(int coins){
 }
 
 /**
- * @brief display the first letter of the card name
+ * @brief imprimer la première lettre de la carte
  * 
  * @param out 
  */
@@ -232,7 +232,7 @@ void soy::print(ostream& out){
 
 // black
 /**
- * @brief Construct a new black::black object
+ * @brief Constructeur de black
  * 
  * @param name 
  */
@@ -251,14 +251,14 @@ string black::getName(){
 }
 
 /**
- * @brief retourne le nombre de cartes qui correspond au nombre de piece
+ * @brief retourne le nombre de cartes qui correspond au nombre de pieces en entrée
  * 
  * @param coins 
  * @return int 
  */
 int black::getCardsPerCoin(int coins){
     if (coins < 1 || coins > 4) {
-        cout << "(black) - Check the value of coins passed getCardsPerCoin. Value received : " << coins << endl;
+        cout << "(black) - Impossible value of coins passed to getCardsPerCoin : " << coins << endl;
         return -1;
     }
 
@@ -267,7 +267,7 @@ int black::getCardsPerCoin(int coins){
 }
 
 /**
- * @brief display the first letter of the card name
+ * @brief imprimer la première lettre de la carte
  * 
  * @param out 
  */
@@ -277,7 +277,7 @@ void black::print(ostream& out){
 
 // Red
 /**
- * @brief Construct a new Red:: Red object
+ * @brief Constructeur de Red
  * 
  * @param name 
  */
@@ -296,14 +296,14 @@ string Red::getName(){
 }
 
 /**
- * @brief retourne le nombre de cartes qui correspond au nombre de piece
+ * @brief retourne le nombre de cartes qui correspond au nombre de pieces en entrée
  * 
  * @param coins 
  * @return int 
  */
 int Red::getCardsPerCoin(int coins){
     if (coins < 1 || coins > 4) {
-        cout << "(Red) - Check the value of coins passed getCardsPerCoin. Value received : " << coins << endl;
+        cout << "(Red) - Impossible value of coins passed to getCardsPerCoin : " << coins << endl;
         return -1;
     }
 
@@ -313,7 +313,7 @@ int Red::getCardsPerCoin(int coins){
 
 
 /**
- * @brief display the first letter of the card name
+ * @brief imprimer la première lettre de la carte
  * 
  * @param out 
  */
@@ -322,7 +322,7 @@ void Red::print(ostream& out){
 }
 
 /**
- * @brief Construct a new garden::garden object
+ * @brief Constructeur de garden
  * 
  * @param name 
  */
@@ -342,14 +342,14 @@ string garden::getName(){
 }
 
 /**
- * @brief retourne le nombre de cartes qui correspond au nombre de piece
+ * @brief retourne le nombre de cartes qui correspond au nombre de pieces en entrée
  * 
  * @param coins 
  * @return int 
  */
 int garden::getCardsPerCoin(int coins){
     if (coins < 1 || coins > 4) {
-        cout << "(garden) - Check the value of coins passed getCardsPerCoin. Value received : " << coins << endl;
+        cout << "(garden) - Impossible value of coins passed to getCardsPerCoin : " << coins << endl;
         return -1;
     }
 
@@ -358,7 +358,7 @@ int garden::getCardsPerCoin(int coins){
 }
 
 /**
- * @brief display the first letter of the card name
+ * @brief Afficher la première lettre de la carte
  * 
  * @param out 
  */
@@ -367,7 +367,7 @@ void garden::print(ostream& out){
 }
 
 /**
- * @brief insertion operator to display the card object
+ * @brief Opérateur d'insertion pour afficher une carte
  * 
  * @param out 
  * @param card 
@@ -381,7 +381,7 @@ ostream& operator<<(ostream& out, Card& card)
 
 
 /**
- * @brief write the card inside a file
+ * @brief Écrire la carte dans un fichier
  * 
  * @param filename 
  */

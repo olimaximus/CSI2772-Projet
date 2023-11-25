@@ -1,8 +1,7 @@
 #include "TradeArea.h"
 
 /**
- * @brief returns true if the card can be legally added to the TradeArea, i.e., a 
-card of the same bean is already in the TradeArea.
+ * @brief Retourne si une carte peut être ajouté au TradeArea légalement
  * 
  * @param card 
  * @return true 
@@ -21,7 +20,7 @@ bool TradeArea::legal (Card* card){
 
 
 /**
- * @brief removes a card of the corresponding bean name from the trade area.
+ * @brief Enlève une carte du nom correspondant du TradeArea
  * 
  * @param card 
  * @return Card* 
@@ -34,7 +33,7 @@ Card* TradeArea::trade (string card){
     for(i = tradeAr.begin(); i != tradeAr.end(); i++){
         if( (*i)->getName() == card){
             cardFound = *i;
-            tradeAr.erase(i); // delete the card found
+            tradeAr.erase(i); // Supprimer la carte
             break;
         } 
     }
@@ -43,7 +42,7 @@ Card* TradeArea::trade (string card){
 }
 
 /**
- * @brief retourne the number of card inside the Trade Area
+ * @brief Retourne le nombre de cartes dans le TradeArea
  * 
  * @return int 
  */
@@ -51,7 +50,7 @@ int TradeArea::numCards(){ return tradeAr.size(); }
 
 
 /**
- * @brief insertion operator to display the trade area object
+ * @brief Opérateur d'insertion pour afficher le TradeArea
  * 
  * @param output 
  * @param tr_arr 
@@ -68,7 +67,7 @@ ostream& operator<<(ostream& output, const TradeArea& tr_arr){
 
 
 /**
- * @brief write the TradeArea information inside a file
+ * @brief Écrire le TradeArea dans un fichier
  * 
  * @param filename 
  */
@@ -78,11 +77,11 @@ void TradeArea::saveTradeArea(ofstream& filename){
         filename<<endl;
     }
 
-    cout << "TradeArea saved." << endl;
+    cout << "Saved Trade Area successfully" << endl;
 }
 
 /**
- * @brief return the trade area list of cards
+ * @brief Retourne la liste des cartes dans le TradeArea
  * 
  * @return list<Card*> 
  */

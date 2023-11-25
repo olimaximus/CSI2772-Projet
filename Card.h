@@ -15,7 +15,7 @@ class Card{
     virtual ~Card();
     void saveCard(ofstream& filename);
     /**
-     * @brief insertion operator to display the first character of the card name
+     * @brief Opérateur d'insertion pour afficher la première lettre d'une Carte
      * 
      * @param output 
      * @return ostream& 

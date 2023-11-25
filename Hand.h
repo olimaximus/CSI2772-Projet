@@ -14,8 +14,8 @@ class CardFactory;
 
 class Hand{
     private:
-        queue <Card*, list<Card*>> pHand; // player hand
-        // empty the queue pHand
+        queue <Card*, list<Card*>> pHand; // main du joueur
+        // vider la liste de la main du joueur
         void clearHand(){
             while(!pHand.empty()){
                 pHand.pop();
@@ -23,12 +23,12 @@ class Hand{
         }
     public:
         /**
-         * @brief Construct a new Hand object
+         * @brief Constructeur de Hand
          * 
          */
         Hand(){};
         /**
-         * @brief Construct a new Hand object from an istream
+         * @brief Constructeur de Hand à partir d'un istream
          * 
          * @param input 
          * @param cf 
@@ -37,13 +37,13 @@ class Hand{
             string line;
             Card* card = nullptr;
             int count = 0;
-            while (getline(input, line))
+            while (getline(input, line)) // Passer à travers chaque ligne
             {
                 istringstream iss(line);
                 string data;
                 if (!(iss >> data)) { 
                     continue;
-                } // error
+                }
 
                 count++;
                 if(data == "B")       card = new Blue;
@@ -55,7 +55,7 @@ class Hand{
                 else if(data == "R")  card = new Red;
                 else if(data == "g")  card = new garden;
                 else {
-                    cout << "(Hand Constructor) Check the card name in the file. Value received : " << data << endl;
+                    cout << "(Hand Constructor) Impossible value of card : " << data << endl;
                     exit(1);
                 }
 
@@ -63,11 +63,11 @@ class Hand{
 
             }
 
-            cout << "Hand with " << count << " cards initialized from file properly." <<endl;
+            cout << "Initialized Hand with " << count << " cards from file successfully." <<endl;
 
         };
         /**
-         * @brief add the card inside the hand of the player
+         * @brief Opérateur += pour ajouter une carte à la main du joueur
          * 
          * @param card 
          * @return Hand& 
@@ -81,39 +81,38 @@ class Hand{
         Card* getCard(int pos);
         queue <Card*, list<Card*>>* getListOfCards();
         /**
-         * @brief  returns and removes the Card at a given index
+         * @brief  Retourne et enlève la carte à l'index choisi
          * 
          * @param pos 
          * @return Card* 
          */
         Card* operator[](int pos){
-            Card* card = nullptr; // removed card to return
-            queue <Card*, list<Card*>> temp; // temp player hand
-            Card* temp_card = nullptr;  // temp card
+            Card* card = nullptr; // Carte à retourner
+            queue <Card*, list<Card*>> temp; // Main du joueur temporaire
+            Card* temp_card = nullptr;  // Carte temporaire
             int find_idx = 0;
             while(!pHand.empty()){
                 if(find_idx++ == pos){
-                    // do not add the element in the temporary queue
-                    card = pHand.front();
+                    card = pHand.front(); // Garder la carte voulue
                     pHand.pop();
                 }
-                else
+                else // Mettre toutes les autres cartes dans la main temporaire
                 {
-                    temp_card = pHand.front(); // get the card
-                    pHand.pop();     // add it in the temporary queue
-                    temp.push(temp_card); // add the card in the queue
+                    temp_card = pHand.front();
+                    pHand.pop();
+                    temp.push(temp_card);
                 }
             }
 
-            // get the initial elements without the removed card inside pHand
+            // Remettre les autres cartes dans la main
             while(!temp.empty()){
               
-                temp_card = temp.front(); // get the card
-                temp.pop();     // add it in the temporary queue
-                pHand.push(temp_card); // add the card in the queue
+                temp_card = temp.front();
+                temp.pop();
+                pHand.push(temp_card);
                 
             }
-            return card;  
+            return card; // Retourner la carte voulue
         };
         int numCards();
         friend ostream& operator<<( ostream&,  Hand& );

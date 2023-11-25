@@ -2,7 +2,7 @@
 #include <iomanip>
 
 /**
- * @brief retourne le nombre de cartes dans le deck
+ * @brief retourne le nombre de cartes dans une chaine
  * 
  * @return int 
  */
@@ -11,7 +11,7 @@ int Chain_Base::getSize(){
 }
 
 /**
- * @brief Set the ChainType of the Chain_Base
+ * @brief Fixer le type de chaine
  * 
  * @param chainType 
  */
@@ -20,7 +20,7 @@ void Chain_Base::setChainType(string chainType){
 }
 
 /**
- * @brief Get the Chain Type 
+ * @brief Obtenir le type de chaine 
  * 
  * @return string 
  */
@@ -29,7 +29,7 @@ string Chain_Base::getChainType(){
 }
 
 /**
- * @brief write chain inside a file
+ * @brief Écrire une chaine dans un fichier
  * 
  * @tparam T 
  * @param filename 
@@ -41,20 +41,20 @@ void Chain_Base::saveChain(ofstream& filename){
         filename << endl;
     }
 
-    cout << "Chain saved." << endl;
+    cout << "Saved Chain successfully" << endl;
 }
 
 /**
- * @brief insertion operator to display the chain information
+ * @brief Opérateur d'insertion pour afficher une chaine
  * 
  * @param output 
- * @param d 
+ * @param c 
  * @return ostream& 
  */
-ostream& operator<<( ostream &output, const Chain<Card*> & d ){
-    output << d.chainType << " ";
-    for(int i = 0; i < d.chain.size(); i++){
-        d.chain.at(i)->print(output);
+ostream& operator<<( ostream &output, const Chain<Card*> & c ){
+    output << c.chainType << " ";
+    for(int i = 0; i < c.chain.size(); i++){
+        c.chain.at(i)->print(output);
         output << " ";
     }
     
@@ -65,16 +65,16 @@ ostream& operator<<( ostream &output, const Chain<Card*> & d ){
 
 
 /**
- * @brief insertion operator display the chain_base information
+ * @brief Opérateur d'insertion pour afficher une chaine_base
  * 
  * @param output 
- * @param d 
+ * @param c 
  * @return ostream& 
  */
-ostream& operator<<( ostream &output, const Chain_Base & d ){
-    output << d.chainType  << " " << setw(4);
-    for(int i = 0; i < d.chain.size(); i++){
-        d.chain.at(i)->print(output);
+ostream& operator<<( ostream &output, const Chain_Base & c ){
+    output << c.chainType  << " " << setw(4);
+    for(int i = 0; i < c.chain.size(); i++){
+        c.chain.at(i)->print(output);
         output << " ";
     }
     

@@ -11,15 +11,15 @@ using namespace std;
 
 
 class Player{
-    string pName; // player name
-    Hand* pHand; // player hand
-    vector<Chain_Base*> pChains; // player chains
-    int pCoins;  // number of coins held by the player
+    string pName;
+    Hand* pHand;
+    vector<Chain_Base*> pChains;
+    int pCoins;
     const int MAX_NUM_CHAINS;
     int ALLOWED_CHAINS;
     public:
         /**
-         * @brief Construct a new Player object
+         * @brief Constructeur de Player
          * 
          * @param name 
          */
@@ -29,7 +29,7 @@ class Player{
             pHand = new Hand();
         };
         /**
-         * @brief Construct a new Player object from an istream
+         * @brief Constructeur de Player à partir d'un istream
          * 
          * @param input 
          * @param cf 
@@ -39,29 +39,29 @@ class Player{
             string chainType;
             Card* card = nullptr;
             pHand = new Hand();
-            int  chain_idx = -1; // keep track of the idx of the chain being added from the text file
-            int  count = 0; // number of cards received
+            int  chain_idx = -1; // Nombre de chaine ayant été initialisées
+            int  count = 0; // Nombre de cartes ayant été reçues
             bool nameInitialized   = false;
             bool coinsInitialized  = false;
             bool handInitialized   = false;
             bool chainsInitialized = false;
             bool chainTypeInitialized = false;
             
-            while (getline(input, line))
+            while (getline(input, line)) // Passer à travers chaque ligne
             {
                 istringstream iss(line);
                 string data;
                 if (!(iss >> data)) { 
                     continue;
                 } 
-                // get the name on the first line of the file
+                // Initialiser le nom
                 if(!nameInitialized) {
                     pName = data;
                     nameInitialized = true;
                     continue;
                 }
 
-                // get the coins on the second line of the file
+                // Initialiser le nombre de pièces
                 if(!coinsInitialized){
                     const char *str_data =  &data[0];
                     sscanf(str_data, "%d", &pCoins);
@@ -69,10 +69,10 @@ class Player{
                     continue;
                 }
 
-                // initialized the hand
+                // Initialiser la main
                 if(!handInitialized){
-                    if(data == "-chains"){
-                        handInitialized = true; // we have reached the end of the hand content
+                    if(data == "-chains"){ // Fin de la main
+                        handInitialized = true;
                         continue;
                     } 
                     else{
@@ -86,29 +86,27 @@ class Player{
                         else if(data == "R")  card = new Red;
                         else if(data == "g")  card = new garden;
                         else {
-                            cout << "(Player Constructor) Check the card name in the file. Value received : " << data << endl;
+                            cout << "(Player Constructor) Impossible value of card : " << data << endl;
                             exit(1);
                         }
-                      //
                       if(card != nullptr) *pHand+=card;
                    }
                 }
 
-                // initialize the chains
-                if(!chainsInitialized && handInitialized){ // wait for the chain to be initialized 
+                // Initialiser les chaines
+                if(!chainsInitialized && handInitialized){ // Attendre que la main soit initialisée
 
-                    if(data == "-end-chains") {
+                    if(data == "-end-chains") { // Fin des chaines
                         chainsInitialized = true;
                         continue;
                     }
                     else{
-                       if(data == "---"){
+                       if(data == "---"){ // Début d'une nouvelle chaine
                            chainTypeInitialized = false;
-                           continue; // get the chain data
+                           continue;
                        }else{
                            if(!chainTypeInitialized){
-                             // the first line is the chain type
-                             chainType = data;
+                             chainType = data; // La première ligne est le type de la chaine
                              chainTypeInitialized = true;
 
                              Chain_Base* new_chain;
@@ -121,11 +119,11 @@ class Player{
                              else if(chainType == "Red")   new_chain = new Chain<Red>;
                              else if(chainType == "garden")new_chain = new Chain<garden>;
                              else {
-                                    cout << "(Player Constructor) Check the chain type. Value received : " << chainType << endl;
+                                    cout << "(Player Constructor) Impossible value of chain type : " << chainType << endl;
                                     new_chain = nullptr; 
                                     exit(1);
                              }
-                             // add the chain if it has been initialized
+                             // Ajouter la chaine initialisée
                              if(new_chain != nullptr) {
                                  pChains.push_back(new_chain);
                                  chain_idx++;
@@ -134,7 +132,7 @@ class Player{
 
                           }else{
                               card = nullptr;
-                              // collect the card
+                              // Obtenir une carte
                               if(data == "B")       card = new Blue;
                               else if(data == "C")  card = new Chili;
                               else if(data == "S")  card = new Stink;
@@ -144,26 +142,26 @@ class Player{
                               else if(data == "R")  card = new Red;
                               else if(data == "g")  card = new garden;
                               else {
-                                  cout << "(Player Constructor) Check the card name in the file. Value received : " << data << endl;
+                                  cout << "(Player Constructor) Impossible value of card : " << data << endl;
                                   exit(1);
                               }
                               if(chain_idx != -1 && card != nullptr){
                                   *(pChains.at(chain_idx))+=card;
                               }else{
-                                  cout << "(Player Constructor) No chain has been added so far. chain_idx : " << chain_idx << endl;
+                                  cout << "(Player Constructor) No chains have been added. chain_idx : " << chain_idx << endl;
                               }
                             
                           }
                        }
-                    }// else block
-                }// end of if
-            }// end of while loop
+                    }
+                }
+            }
 
-            cout << "Player initialized from file properly." <<endl;
+            cout << "Initialised Player from file successfully" << endl;
         };
         
         /**
-         * @brief Destroy the Player object
+         * @brief Destructeur de Player
          * 
          */
         ~Player(){
@@ -171,7 +169,7 @@ class Player{
         };
 
         /**
-         * @brief permet d'augmenter le nombre de point du joueur
+         * @brief Opérateur += pour ajouter des pièces à un joueur
          * 
          * @param coins 
          * @return Player& 
@@ -182,7 +180,7 @@ class Player{
         };
 
         /**
-         * @brief retourne la chaine à l'index i correspondant
+         * @brief Opérateur [] pour renvoyer la chaine du joueur voulue
          * 
          * @param i 
          * @return Chain_Base& 
@@ -198,7 +196,7 @@ class Player{
         int getNumCoins();
         int getMaxNumChains();
         int getNumChains();
-        int getNumCards(); // get the number of cards inside the hand
+        int getNumCards();
         Hand* getHand();
         vector<Chain_Base*>* getChains();
         void buyThirdChain();
@@ -206,13 +204,14 @@ class Player{
         void startNewChain(Chain_Base* new_chain, Card* card, bool specified_input);
 
         /**
-         * @brief  prints the top card of the player's hand (with in == false) or all of the player's hand (with ain == true) to the supplied ostream
+         * @brief  Si b=false: affiche la première carte de la main du joueur,
+         * si b=true: affiche la main du joueur
          * 
          * @param output 
-         * @param in 
+         * @param b 
          */
-        void printHand(ostream& output, bool in){
-            if(!in){
+        void printHand(ostream& output, bool b){
+            if(!b){
                 output << pHand->top()->getName()[0] << endl;
             }else{
                 for(int i = 0; i < pHand->numCards(); i++){

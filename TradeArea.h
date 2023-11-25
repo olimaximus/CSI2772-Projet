@@ -16,12 +16,12 @@ class TradeArea{
      const int MAX_CARDS;
      public:
         /**
-         * @brief Construct a new Trade Area object
+         * @brief Constructeur de TradeArea
          * 
          */
         TradeArea():MAX_CARDS(3){};
         /**
-         * @brief Construct a new Trade Area object from an istream
+         * @brief Constructeur de TradeArea à partir d'un istream
          * 
          * @param input 
          * @param cf 
@@ -30,12 +30,11 @@ class TradeArea{
             string line;
             Card* card = nullptr;
             int count = 0;
-            while (getline(input, line))
+            while (getline(input, line)) // Passer à travers chaque ligne
             {
                 istringstream iss(line);
                 string data;
-                if (!(iss >> data)) { 
-
+                if (!(iss >> data)) {
                     continue;
                 } 
 
@@ -49,18 +48,16 @@ class TradeArea{
                 else if(data == "R")  card = new Red;
                 else if(data == "g")  card = new garden;
                 else {
-                    cout << "(TradeArea Constructor) Check the card name in the file. Value received : " << data << endl;
+                    cout << "(TradeArea Constructor) Impossible value of card : " << data << endl;
                     exit(1);
                 }
-                //
                 if(card != nullptr) tradeAr.push_back(card);
-
             }
 
-            cout << "TradeArea with " << count << " cards initialized from file properly." << endl;
+            cout << "Initialized TradeArea with " << count << " cards from file successfully." << endl;
         };
         /**
-         * @brief add a card inside the trade area
+         * @brief Opérateur += pour ajouter une carte au TradeArea
          * 
          * @param card 
          * @return TradeArea& 
@@ -72,7 +69,7 @@ class TradeArea{
                  if(tradeAr.size() < 3){
                      tradeAr.push_back(card);
                  }else{
-                     cout<< "The card [" << card->getName() << "] can not be added to the Trade Area." << endl;
+                     cout<< "The card [" << card->getName() << "] couldn't be added to the TradeArea." << endl;
                  }
              }
              return *this;

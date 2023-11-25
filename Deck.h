@@ -16,12 +16,12 @@ class CardFactory;
 class Deck: public vector<Card*>{
      public :
         /**
-         * @brief Construct a new Deck object
+         * @brief Constructeur de Deck
          * 
          */
         Deck(): vector<Card*>(){};
         /**
-         * @brief Construct a new Deck object from an istream
+         * @brief Constructeur de Deck à partir d'un istream
          * 
          * @param input 
          * @param cf 
@@ -30,7 +30,7 @@ class Deck: public vector<Card*>{
             string line;
             Card* card = nullptr;
             int count = 0;
-            while (getline(input, line))
+            while (getline(input, line)) // Passer à travers chaque ligne
             {
                 istringstream iss(line);
                 string data;
@@ -48,41 +48,37 @@ class Deck: public vector<Card*>{
                 else if(data == "R")  card = new Red;
                 else if(data == "g")  card = new garden;
                 else {
-                    cout << "(Deck Constructor) Check the card name in the file. Value received : " << data << endl;
+                    cout << "(Deck Constructor) Impossible value of card : " << data << endl;
                     exit(1);
                 }
-                //
                 if(card != nullptr) this->push_back(card);
-
             }
 
-            cout << "Deck with " << count << " cards initialized from file properly." << endl;
+            cout << "Initialized Deck with " << count << " cards from file successfully." << endl;
 
         };
         /**
-         * @brief Construct a new Deck object; copy constructor
+         * @brief Constructeur de recopie de Deck
          * 
          * @param d 
          */
         Deck(const Deck& d){
-            // clear the item from the current deck
-            this->clear(); 
-            // get the items from d inside this current deck
-            for(int i = 0; i < 104; i++){
+            // Effacer le paquet courant
+            this->clear();
+            for(int i = 0; i < 104; i++){ // Recopier chaque carte dans le paquet courant
                 this->push_back(d.at(i));
             }
-            cout << "Deck of size("<<d.size()<<") copied."<< endl;
+            cout << "Deck of size "<<d.size()<<" copied successfully"<< endl;
         }
            
         /**
-         * @brief Destroy the Deck object
+         * @brief Destructeur de Deck
          * 
          */
         ~Deck(){
             for(int i = 0; i < this->size(); i++){
                 delete this->at(i);
             }
-            cout << "Deck of size("<<this->size()<<") destroyed."<< endl;
         };
 
         Card* draw();

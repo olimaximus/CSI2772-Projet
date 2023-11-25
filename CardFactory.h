@@ -1,7 +1,7 @@
 
 #include <algorithm>
-#include <random>
 #include <chrono>
+#include <random>
 
 #ifndef CARDFACTORY_H
 #define CARDFACTORY_H

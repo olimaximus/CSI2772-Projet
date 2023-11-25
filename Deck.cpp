@@ -1,18 +1,18 @@
 #include "Deck.h"
 
 /**
- * @brief returns and removes the top card from the deck
+ * @brief Retourne et enlève la première carte du paquet
  * 
  * @return Card* 
  */
 Card* Deck::draw(){
-    Card* card =  this->back(); // get the last added card
-    this->pop_back(); // remove the last element from the deck
-    return card;  
+    Card* card =  this->back(); // Copier la carte
+    this->pop_back(); // Enlever la carte du paquet
+    return card;  // Retourner la carte
 }
 
 /**
- * @brief assignment operator for the class Deck
+ * @brief Opérateur = de Deck
  * 
  * @param d 
  * @return Deck& 
@@ -24,7 +24,7 @@ Deck& Deck::operator=(const Deck& d){
     return *this;
 }
 /**
- * @brief insertion operator to display the deck object
+ * @brief Opérateur d'insertion pour afficher le paquet
  * 
  * @param output 
  * @param d 
@@ -33,7 +33,7 @@ Deck& Deck::operator=(const Deck& d){
 ostream& operator<<( ostream& output, const Deck& d ){
 
     for(int i = 0; i < d.size(); i++){
-        output << d.at(i)->getName()[0] << endl;
+        output << d.at(i)->getName()[0] << endl; // Imprimer chaque carte
     }
 
     return output;
@@ -41,7 +41,7 @@ ostream& operator<<( ostream& output, const Deck& d ){
 
 
 /**
- * @brief write the deck inside a file
+ * @brief Écrire le paquet dans un fichier
  * 
  * @param filename 
  */
@@ -50,7 +50,7 @@ void Deck::saveDeck(ofstream& filename){
         this->at(i)->saveCard(filename);
         filename << endl;
     }
-    cout << "Deck saved." << endl;
+    cout << "Saved Deck successfully" << endl;
 }
 
 

@@ -1,18 +1,18 @@
 #include "Hand.h"
 
 /**
- * @brief returns and removes the top card from the player's hand.
+ * @brief Retourne et enlève la première carte de la main
  * 
  * @return Card* 
  */
 Card* Hand::play(){
     Card* card = pHand.front();
-    pHand.pop(); // remove the first element
+    pHand.pop();
     return card;
 }
 
 /**
- * @brief retourne la carte qui se trouve au sommet de la pile de la main (Hand)
+ * @brief Retourne la première carte de la main sans l'enlever
  * 
  * @return Card* 
  */
@@ -21,7 +21,7 @@ Card* Hand::top(){
 }
 
 /**
- * @brief retourne le nombre de cartes contenues dans la main (Hand)
+ * @brief Retourne le nombre de cartes dans la main
  * 
  * @return int 
  */
@@ -30,37 +30,38 @@ int Hand::numCards(){
 }
 
 /**
- * @brief retourne la carte à l'index spécifié par le paramètre pos
+ * @brief Retourne la carte à l'index choisi
  * 
  * @param pos 
  * @return Card* 
  */
 Card* Hand::getCard(int pos){
-    Card* card = nullptr; // removed card to return
+    Card* card = nullptr; // Carte à retourner
     if(pos > pHand.size()-1){
-        cout << "(getCard) The index "  << pos << " can not be used. Current size of the hand = " << pHand.size() << endl;
+        cout << "(getCard) The index "  << pos << " is out of range for a hand of size: " << pHand.size() << endl;
     }else{
-        queue <Card*, list<Card*>> temp; // temp player hand
-        Card* temp_card = nullptr;  // temp card
+        queue <Card*, list<Card*>> temp; // Main du joueur temporaire
+        Card* temp_card = nullptr;  // Carte temporaire
         int find_idx = 0;
         while(!pHand.empty()){
 
             if(find_idx++ == pos){
-                // get the element
-                card = pHand.front();
+                card = pHand.front(); // Garder la carte voulue
             }
-            temp_card = pHand.front(); // get the card
-            pHand.pop();     // add it in the temporary queue
-            temp.push(temp_card); // add the card in the queue
+
+            // Mettre toutes les cartes dans la main temporaire
+            temp_card = pHand.front();
+            pHand.pop();
+            temp.push(temp_card);
             
         }
 
-        // get the initial elements without the removed card inside pHand
+        // Remettre les cartes dans la main
         while(!temp.empty()){
             
-            temp_card = temp.front(); // get the card
-            temp.pop();     // add it in the temporary queue
-            pHand.push(temp_card); // add the card in the queue
+            temp_card = temp.front();
+            temp.pop();
+            pHand.push(temp_card);
             
         }
     }
@@ -70,7 +71,7 @@ Card* Hand::getCard(int pos){
 }
 
 /**
- * @brief insertion operator to display the content of the Hand object
+ * @brief Opérateur d'insertion pour afficher les cartes d'une main
  * 
  * @param output 
  * @param hand 
@@ -87,37 +88,23 @@ ostream& operator<<( ostream& output, Hand& hand){
 
 /**
  * 
- * @brief write the card inside a file
+ * @brief Écrire la main dans un fichier
  * 
  */
 void Hand::saveHand(ofstream& filename){
-
-    Card* card = nullptr; // removed card to return
-    queue <Card*, list<Card*>> temp; // temp player hand
-    Card* temp_card = nullptr;  // temp card
-    int find_idx = 0;
-    while(!pHand.empty()){
-        temp_card = pHand.front(); // get the card
-        temp_card -> saveCard(filename);
+    Card* card = nullptr;
+    while(!pHand.empty()){ // Pour chaque carte de la main
+        card = pHand.front(); // Obtenir une carte
+        card -> saveCard(filename); // Sauvegarder la carte
         filename << endl;
-        pHand.pop();     // add it in the temporary queue
-        temp.push(temp_card); // add the card in the queue
+        pHand.pop();
     }
 
-    // get the initial elements without the removed card inside pHand
-    while(!temp.empty()){
-        
-        temp_card = temp.front(); // get the card
-        temp.pop();     // add it in the temporary queue
-        pHand.push(temp_card); // add the card in the queue
-        
-    }
-
-    cout << "Hand saved." << endl;
+    cout << "Saved Hand successfully" << endl;
 }
 
 /**
- * @brief Get the List Of Cards inside the hand
+ * @brief Retourne la liste des cartes dans une main
  * 
  * @return queue <Card*, list<Card*>> 
  */

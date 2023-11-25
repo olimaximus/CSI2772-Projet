@@ -27,7 +27,7 @@ class Chain_Base{
             return *this;
         };
         virtual ~Chain_Base() {};
-        friend ostream& operator<<( ostream &output, const Chain_Base & d );
+        friend ostream& operator<<( ostream &output, const Chain_Base & c );
 };
 
 
@@ -35,17 +35,17 @@ template <typename T = Card>
 class Chain : public virtual Chain_Base{
     public:
         /**
-         * @brief Construct a new Chain object
+         * @brief Constructeur de Chain
          * 
          */
         Chain(){ 
             chainType = typeid(T).name();
             if(isdigit(chainType.at(0)) ){
-                chainType =  chainType.substr(1,chainType.size()); // remove the first unexpected digit in the type name
+                chainType =  chainType.substr(1,chainType.size()); // Enlever les chiffres non attendus
             }
         };
         /**
-         * @brief Construct a new Chain< T>:: Chain object
+         * @brief Constructeur de Chain<T>
          * 
          * @tparam T 
          * @param input 
@@ -55,7 +55,7 @@ class Chain : public virtual Chain_Base{
                 string line;
                 Card* card = nullptr;
                 int count = 0;
-                while (getline(input, line))
+                while (getline(input, line)) // Passer à travers chaque ligne
                 {
                     istringstream iss(line);
                     string data;
@@ -72,18 +72,16 @@ class Chain : public virtual Chain_Base{
                     else if(data == "R")  card = new Red;
                     else if(data == "g")  card = new garden;
                     else {
-                        cout << "(Chain Constructor) Check the card name in the file. Value received : " << data << endl;
+                        cout << "(Chain Constructor) Impossible value of card : " << data << endl;
                         exit(1);
                     }
-                    //
-                    if(card != nullptr) (*this)+=card;
-
+                    if(card != nullptr) (*this)+=card; // Ajouter la carte
                 }
 
-                cout << "Chain with " << count << " cards initialized from file properly." << endl;
+                cout << "Initialized Chain with " << count << " cards from file successfully." << endl;
         };
         /**
-         * @brief add the card to the chain using the operator+=
+         * @brief Opérateur += pour ajouter une carte à une chaine
          * 
          * @param card 
          * @return Chain<T>& 
@@ -91,7 +89,7 @@ class Chain : public virtual Chain_Base{
         Chain<T>& operator+=(Card* card){
 
             if(getSize() == 0)
-               chainType = typeid(card).name();// update the chain type
+               chainType = typeid(card).name();// Mettre à jour le type de chaine
 
             if(typeid(T) == typeid(card) ){
                 chain.push_back(card);
@@ -100,13 +98,12 @@ class Chain : public virtual Chain_Base{
             else throw runtime_error("IllegalType");
         };
         /**
-         * @brief  counts the number cards in the current chain and returns the number coins 
-        according to the function Card::getCardsPerCoin
+         * @brief  Retourne la valeur de vente d'une chaine, basé sur getCardsPerCoin
          * 
          * @return int 
         */
         int sell(){
-            T elem; // initialize a card item to access the method getCardsPerCoin
+            T elem; // Initializer une carte
             for (int i = 4; i > 0; i--) {
                 if (chain.size() >= elem.getCardsPerCoin(i)) return i;
             }

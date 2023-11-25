@@ -1,5 +1,3 @@
-
-
 #include <vector>
 #include <iostream>
 #include <sstream>
@@ -17,13 +15,13 @@ class CardFactory;
 class DiscardPile:  public vector<Card*>{
     public:
         /**
-         * @brief Construct a new Discard Pile object
+         * @brief Constructeur de DiscardPile
          * 
          */
         DiscardPile(): vector<Card*>(){};
 
         /**
-         * @brief Construct a new Discard Pile object from an istream
+         * @brief Constructeur de DiscardPile à partir d'un istream
          * 
          * @param input 
          * @param cf 
@@ -32,7 +30,7 @@ class DiscardPile:  public vector<Card*>{
             string line;
             Card* card = nullptr;
             int count = 0;
-            while (getline(input, line))
+            while (getline(input, line)) // Passer à travers chaque ligne
             {
                 istringstream iss(line);
                 string data;
@@ -50,20 +48,18 @@ class DiscardPile:  public vector<Card*>{
                 else if(data == "R")  card = new Red;
                 else if(data == "g")  card = new garden;
                 else {
-                    cout << "(DiscardPile Constructor) Check the card name in the file. Value received : " << data << endl;
+                    cout << "(DiscardPile Constructor) Impossible value of card : " << data << endl;
                     exit(1);
                 }
-                //
                 if(card != nullptr) this->push_back(card);
-
             }
 
-            cout << "DiscardPile with " << count << " cards initialized from file properly." << endl;
+            cout << "Initialized DiscardPile with " << count << " cards from file successfully." << endl;
 
         };
 
         /**
-         * @brief add a card inside the discard pile using the operator +=
+         * @brief Opérateur += pour ajouter une carte à la DiscardPile
          * 
          * @param c 
          * @return DiscardPile& 

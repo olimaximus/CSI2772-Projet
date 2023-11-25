@@ -12,7 +12,7 @@ using namespace std;
 class Table{
     Player* p1;
     Player* p2;
-    int currentPlayer; // id of the current player
+    int currentPlayer; // id du joueur courant
     DiscardPile* dp;
     TradeArea* tradeAr;
     Deck* deck;
@@ -20,7 +20,7 @@ class Table{
     
     public:
         /**
-         * @brief Construct a new Table object
+         * @brief Constructeur de Table
          * 
          * @param p_one 
          * @param p_two 
@@ -39,7 +39,7 @@ class Table{
         }
 
         /**
-         * @brief Destroy the Table object
+         * @brief Destructeur de table
          * 
          */
         ~Table(){

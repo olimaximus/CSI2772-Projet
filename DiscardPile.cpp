@@ -1,19 +1,18 @@
 #include "DiscardPile.h"
 
 /**
- * @brief  returns and removes the top card from the discard pile.
+ * @brief Retourne et enlève la première carte de la DiscardPile
  * 
  * @return Card* 
  */
 Card* DiscardPile::pickUp(){
-    Card* card;
-    card =  this->back();
-    this->pop_back();
-    return card;
+    Card* card =  this->back(); // Copier la carte
+    this->pop_back(); // Enlever la carte du paquet
+    return card; // Retourner la carte
 }
 
 /**
- * @brief returns but does not remove the top card from the discard pile.
+ * @brief Retourne la première carte de la DiscardPile sans l'enlever
  * 
  * @return Card* 
  */
@@ -23,21 +22,21 @@ Card* DiscardPile::top(){
 
 
 /**
- * @brief permet d'inserer toutes les cartes du DiscardPile dans le ostream
+ * @brief Insérer les cartes de la DiscardPile dans un ostream
  * 
  * @param os 
  */
 void  DiscardPile::print(ostream& os){
 
     for(int i = 0; i < this->size(); i++){
-        os << this->at(i)->getName()[0]<< " ";
+        os << this->at(i)->getName()[0]<< " "; // Imprimer chaque carte
     };
   
 }
 
 
 /**
- * @brief insertion operator to display the discard pile object (only the card on top of the discard pile)
+ * @brief Opérateur d'insertion pour afficher la première carte de la DiscardPile
  * 
  * @param output 
  * @param dp 
@@ -54,7 +53,7 @@ ostream& operator<<( ostream &output, const DiscardPile& dp ){
 }
 
 /**
- * @brief write the discard pile inside a file
+ * @brief Écrire la DiscardPile dans un fichier
  * 
  * @param filename 
  */
@@ -63,5 +62,5 @@ void DiscardPile::saveDiscardPile(ofstream& filename){
         this->at(i)->saveCard(filename);
         filename << endl;
     }
-    cout << "Discard Pile saved." << endl;
+    cout << "Saved Discard Pile successfully" << endl;
 }
