@@ -2,18 +2,12 @@
 
 // Card
 
-/**
- * @brief Destructeur de Card
- *
- */
+// Destructeur de Card.
 Card::~Card() {}
 
-/**
- * @brief Constructeur de Blue
- *
- * @param name
- */
+// Constructeur de Blue.
 Blue::Blue(string name) { this->name = name; }
+
 /**
  * @brief retourne le nombre de cartes qui correspond au nombre de pieces en
  * entrée
@@ -32,32 +26,16 @@ int Blue::getCardsPerCoin(int coins) {
   return cardsPerCoin[coins - 1];
 }
 
-/**
- * @brief retourne le nom de la carte
- *
- * @return string
- */
+//Retourne le nom de la carte
 string Blue::getName() { return this->name; }
 
-/**
- * @brief imprimer la première lettre de la carte
- *
- * @param out
- */
+//Imprimer la première lettre de la carte
 void Blue::print(ostream &out) { out << this->getName()[0]; }
 
-/**
- * @brief Constructeur de Chili
- *
- * @param name
- */
+//Constructeur de Chili
 Chili::Chili(string name) { this->name = name; }
 
-/**
- * @brief retourne le nom de la carte
- *
- * @return string
- */
+//Retourne le nom de la carte
 string Chili::getName() { return this->name; }
 
 /**
@@ -78,25 +56,13 @@ int Chili::getCardsPerCoin(int coins) {
   return cardsPerCoin[coins - 1];
 }
 
-/**
- * @brief imprimer la première lettre de la carte
- *
- * @param out
- */
+//Imprimer la première lettre de la carte
 void Chili::print(ostream &out) { out << this->getName()[0]; }
 
-/**
- * @brief Constructeur de Stink
- *
- * @param name
- */
+//Constructeur de Stink
 Stink::Stink(string name) { this->name = name; }
 
-/**
- * @brief retourne le nom de la carte
- *
- * @return string
- */
+//Retourne le nom de la carte
 string Stink::getName() { return this->name; }
 
 /**
@@ -117,26 +83,13 @@ int Stink::getCardsPerCoin(int coins) {
   return cardsPerCoin[coins - 1];
 }
 
-/**
- * @brief imprimer la première lettre de la carte
- *
- * @param out
- */
+//imprimer la première lettre de la carte
 void Stink::print(ostream &out) { out << this->getName()[0]; }
 
-// Green
-/**
- * @brief Constructeur de Green
- *
- * @param name
- */
+//Constructeur de Green
 Green::Green(string name) { this->name = name; }
 
-/**
- * @brief retourne le nom de la carte
- *
- * @return string
- */
+//retourne le nom de la carte
 string Green::getName() { return this->name; }
 
 /**
@@ -157,26 +110,15 @@ int Green::getCardsPerCoin(int coins) {
   return cardsPerCoin[coins - 1];
 }
 
-/**
- * @brief imprimer la première lettre de la carte
- *
- * @param out
- */
+//imprimer la première lettre de la carte
 void Green::print(ostream &out) { out << this->getName()[0]; }
 
 // soy
-/**
- * @brief Constructeur de soy
- *
- * @param name
- */
+
+//Constructeur de soy
 soy::soy(string name) { this->name = name; }
 
-/**
- * @brief retourne le nom de la carte
- *
- * @return string
- */
+//retourne le nom de la carte
 string soy::getName() { return this->name; }
 
 /**
@@ -197,26 +139,15 @@ int soy::getCardsPerCoin(int coins) {
   return cardsPerCoin[coins - 1];
 }
 
-/**
- * @brief imprimer la première lettre de la carte
- *
- * @param out
- */
+//imprimer la première lettre de la carte
 void soy::print(ostream &out) { out << this->getName()[0]; }
 
 // black
-/**
- * @brief Constructeur de black
- *
- * @param name
- */
+
+//Constructeur de black
 black::black(string name) { this->name = name; }
 
-/**
- * @brief retourne le nom de la carte
- *
- * @return string
- */
+//retourne le nom de la carte
 string black::getName() { return this->name; }
 
 /**
@@ -237,26 +168,15 @@ int black::getCardsPerCoin(int coins) {
   return cardsPerCoin[coins - 1];
 }
 
-/**
- * @brief imprimer la première lettre de la carte
- *
- * @param out
- */
+//imprimer la première lettre de la carte
 void black::print(ostream &out) { out << this->getName()[0]; }
 
 // Red
-/**
- * @brief Constructeur de Red
- *
- * @param name
- */
+
+//Constructeur de Red
 Red::Red(string name) { this->name = name; }
 
-/**
- * @brief retourne le nom de la carte
- *
- * @return string
- */
+//Constructeur de Red
 string Red::getName() { return this->name; }
 
 /**
@@ -277,25 +197,13 @@ int Red::getCardsPerCoin(int coins) {
   return cardsPerCoin[coins - 1];
 }
 
-/**
- * @brief imprimer la première lettre de la carte
- *
- * @param out
- */
+//imprimer la première lettre de la carte
 void Red::print(ostream &out) { out << this->getName()[0]; }
 
-/**
- * @brief Constructeur de garden
- *
- * @param name
- */
+//Constructeur de garden
 garden::garden(string name) { this->name = name; }
 
-/**
- * @brief retourne le nom de la carte
- *
- * @return string
- */
+//retourne le nom de la carte
 string garden::getName() { return this->name; }
 
 /**
@@ -316,11 +224,7 @@ int garden::getCardsPerCoin(int coins) {
   return cardsPerCoin[coins - 1];
 }
 
-/**
- * @brief Afficher la première lettre de la carte
- *
- * @param out
- */
+//Afficher la première lettre de la carte
 void garden::print(ostream &out) { out << this->getName()[0]; }
 
 /**
