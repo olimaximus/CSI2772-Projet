@@ -1,11 +1,7 @@
 #include "Chain.h"
 #include <iomanip>
 
-/**
- * @brief retourne le nombre de cartes dans une chaine
- *
- * @return int
- */
+//Retourne le nombre de cartes dans une chaine
 int Chain_Base::getSize() { return chain.size(); }
 
 /**
@@ -15,11 +11,7 @@ int Chain_Base::getSize() { return chain.size(); }
  */
 void Chain_Base::setChainType(string chainType) { chainType = chainType; }
 
-/**
- * @brief Obtenir le type de chaine
- *
- * @return string
- */
+//Retourne le type de chaine
 string Chain_Base::getChainType() { return chainType; }
 
 /**

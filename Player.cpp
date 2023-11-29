@@ -4,18 +4,10 @@
 #include <string>
 
 
-/**
- * @brief Obtenir le nom d'un joueur
- *
- * @return string
- */
+//Obtenir le nom d'un joueur
 string Player::getName() { return this->pName; }
 
-/**
- * @brief Obtenir le nombre de cartes dans la main d'un joueur
- *
- * @return int
- */
+//Obtenir le nombre de cartes dans la main d'un joueur
 int Player::getNumCards() { return pHand->numCards(); }
 
 /**
@@ -126,11 +118,7 @@ Card *Player::playCard(Card *input, bool specified_input) {
  */
 int Player::getMaxNumChains() { return ALLOWED_CHAINS; }
 
-/**
- * @brief Retourne le nombre de chaine non nulle que le joueur possède
- *
- * @return int
- */
+//Retourne le nombre de chaine non nulle que le joueur possède
 int Player::getNumChains() {
   int counter = 0;
   for (int i = 0; i < pChains.size(); i++) {
@@ -190,11 +178,7 @@ Card *Player::removeCard(int pos) {
   return card;
 }
 
-/**
- * @brief Retourne le nombre de pièces d'un joueur
- *
- * @return int
- */
+//Retourne le nombre de pièces d'un joueur
 int Player::getNumCoins() { return pCoins; }
 
 /**
@@ -253,23 +237,13 @@ void Player::savePlayer(int p_id) {
   cout << "Saved Player-" + string(id) << " successfully " << endl;
 }
 
-/**
- * @brief Retourne la main du joueur
- *
- * @return Hand*
- */
+//Retourne la main du joueur
 Hand *Player::getHand() { return pHand; }
 
-/**
- * @brief Retourne les chaines du joueur
- *
- */
+//Retourne les chaines du joueur
 vector<Chain_Base *> *Player::getChains() { return &pChains; }
 
-/**
- * @brief Vendre une chaine
- *
- */
+//Vendre une chaine
 void Player::sellChain() {
   int idx = -1;
   bool firstTimeInLoop = true;
@@ -338,10 +312,7 @@ void Player::sellChain() {
   pChains.erase(pChains.begin() + idx); // Enlever la chaine correspondante
 }
 
-/**
- * @brief Commencer une nouvelle chaine
- *
- */
+//Commencer une nouvelle chaine
 void Player::startNewChain(Chain_Base *new_chain, Card *card,
                            bool specifiedInput) {
   *new_chain += card;

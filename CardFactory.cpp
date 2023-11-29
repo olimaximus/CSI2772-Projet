@@ -13,11 +13,7 @@ CardFactory *CardFactory::getFactory() {
   return instance;
 }
 
-/**
- * @brief Retourne le deck du jeu
- *
- * @return Deck*
- */
+//Retourne le deck du jeu
 Deck *CardFactory::getDeck() {
   int seed = static_cast<int>(chrono::system_clock::now()
                                   .time_since_epoch()
@@ -27,10 +23,7 @@ Deck *CardFactory::getDeck() {
   return deck;
 }
 
-/**
- * @brief Constructeur de CardFactory
- *
- */
+//Constructeur de CardFactory
 CardFactory::CardFactory() {
   // Initializer le deck
   deck = new Deck();

@@ -41,11 +41,7 @@ Card *TradeArea::trade(string card) {
   return cardFound;
 }
 
-/**
- * @brief Retourne le nombre de cartes dans le TradeArea
- *
- * @return int
- */
+//Retourne le nombre de cartes dans le TradeArea
 int TradeArea::numCards() { return tradeAr.size(); }
 
 /**

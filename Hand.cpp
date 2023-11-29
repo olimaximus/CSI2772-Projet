@@ -1,28 +1,16 @@
 #include "Hand.h"
 
-/**
- * @brief Retourne et enlève la première carte de la main
- *
- * @return Card*
- */
+//Retourne et enlève la première carte de la main
 Card *Hand::play() {
   Card *card = pHand.front();
   pHand.pop();
   return card;
 }
 
-/**
- * @brief Retourne la première carte de la main sans l'enlever
- *
- * @return Card*
- */
+//Retourne la première carte de la main sans l'enlever
 Card *Hand::top() { return pHand.front(); }
 
-/**
- * @brief Retourne le nombre de cartes dans la main
- *
- * @return int
- */
+//Retourne le nombre de cartes dans la main
 int Hand::numCards() { return pHand.size(); }
 
 /**
@@ -79,11 +67,7 @@ ostream &operator<<(ostream &output, Hand &hand) {
   return output;
 };
 
-/**
- *
- * @brief Écrire la main dans un fichier
- *
- */
+//Écrire la main dans un fichier
 void Hand::saveHand(ofstream &filename) {
   Card *card = nullptr;
   while (!pHand.empty()) {    // Pour chaque carte de la main

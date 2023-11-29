@@ -122,10 +122,7 @@ void Table::reloadDeck() {
   }
 }
 
-/**
- * @brief Lire les informations de la DiscardPile dans le fichier de sauvegarde
- *
- */
+//Lire les informations de la DiscardPile dans le fichier de sauvegarde
 void Table::reloadDiscardPile() {
   ifstream file("DiscardPile.txt");
   if (file.is_open()) {
@@ -137,10 +134,7 @@ void Table::reloadDiscardPile() {
   }
 }
 
-/**
- * @brief Lire les informations du TradeArea dans le fichier de sauvegarde
- *
- */
+//Lire les informations du TradeArea dans le fichier de sauvegarde
 void Table::reloadTradeArea() {
   ifstream file("TradeArea.txt");
   if (file.is_open()) {
@@ -153,11 +147,7 @@ void Table::reloadTradeArea() {
   }
 }
 
-/**
- * @brief Retourne le Deck de la Table en singleton
- *
- * @return Deck*
- */
+//Retourne le Deck de la Table en singleton
 Deck *Table::getDeck() {
   if (deck == nullptr) {
     deck = cf->getDeck();
@@ -165,11 +155,7 @@ Deck *Table::getDeck() {
   return deck;
 }
 
-/**
- * @brief Retourne la DiscardPile de la Table
- *
- * @return DiscardPile*
- */
+//Retourne la DiscardPile de la Table
 DiscardPile *Table::getDiscardPile() { return dp; }
 
 /**
