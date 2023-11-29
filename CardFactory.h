@@ -10,16 +10,15 @@
 #include "Deck.h"
 using namespace std;
 
-class CardFactory{
-    private:
-        Deck* deck;
-        CardFactory();
-    public:
-        static CardFactory* instance;
-        static CardFactory* getFactory();
-        Deck* getDeck();
+class CardFactory {
+private:
+  Deck *deck;
+  CardFactory();
 
-
+public:
+  static CardFactory *instance;
+  static CardFactory *getFactory();
+  Deck *getDeck();
 };
 
 #endif
