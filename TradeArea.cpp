@@ -1,25 +1,6 @@
 #include "TradeArea.h"
 
 /**
- * @brief Retourne si une carte peut être ajouté au TradeArea légalement
- *
- * @param card
- * @return true
- * @return false
- */
-bool TradeArea::legal(Card *card) {
-
-  bool found = false;
-  list<Card *>::iterator i;
-  for (i = tradeAr.begin(); i != tradeAr.end(); i++) {
-    if ((*i)->getName() == card->getName())
-      found = true;
-  }
-
-  return found;
-}
-
-/**
  * @brief Enlève une carte du nom correspondant du TradeArea
  *
  * @param card
@@ -40,6 +21,27 @@ Card *TradeArea::trade(string card) {
 
   return cardFound;
 }
+
+/**
+ * @brief Retourne si une carte peut être ajouté au TradeArea légalement
+ *
+ * @param card
+ * @return true
+ * @return false
+ */
+bool TradeArea::legal(Card *card) {
+
+  bool found = false;
+  list<Card *>::iterator i;
+  for (i = tradeAr.begin(); i != tradeAr.end(); i++) {
+    if ((*i)->getName() == card->getName())
+      found = true;
+  }
+
+  return found;
+}
+
+
 
 //Retourne le nombre de cartes dans le TradeArea
 int TradeArea::numCards() { return tradeAr.size(); }
