@@ -12,8 +12,8 @@ using namespace std;
 class Player {
   string playerName;
   Hand *playerHand;
-  vector<Chain_Base *> pChains;
-  int pCoins;
+  vector<Chain_Base *> playerChains;
+  int playerCoins;
   const int MAX_NUM_CHAINS;
   int ALLOWED_CHAINS;
 
@@ -25,7 +25,7 @@ public:
    */
   Player(string &name) : MAX_NUM_CHAINS(3), ALLOWED_CHAINS(2) {
     playerName = name;
-    pCoins = 0;
+    playerCoins = 0;
     playerHand = new Hand();
   };
   /**
@@ -65,7 +65,7 @@ public:
       // Initialiser le nombre de pièces
       if (!coinsInitialized) {
         const char *str_data = &data[0];
-        sscanf(str_data, "%d", &pCoins);
+        sscanf(str_data, "%d", &playerCoins);
         coinsInitialized = true;
         continue;
       }
@@ -144,7 +144,7 @@ public:
               }
               // Ajouter la chaine initialisée
               if (new_chain != nullptr) {
-                pChains.push_back(new_chain);
+                playerChains.push_back(new_chain);
                 chain_idx++;
               }
 
@@ -173,7 +173,7 @@ public:
                 exit(1);
               }
               if (chain_idx != -1 && card != nullptr) {
-                *(pChains.at(chain_idx)) += card;
+                *(playerChains.at(chain_idx)) += card;
               } else {
                 cout << "(Player Constructor) No chains have been added. "
                         "chain_idx : "
@@ -201,7 +201,7 @@ public:
    * @return Player&
    */
   Player &operator+=(int coins) {
-    pCoins += coins;
+    playerCoins += coins;
     return *this;
   };
 
@@ -211,7 +211,7 @@ public:
    * @param i
    * @return Chain_Base&
    */
-  Chain_Base &operator[](int i) { return *(pChains.at(i)); };
+  Chain_Base &operator[](int i) { return *(playerChains.at(i)); };
 
   void takeCard(Card *);
   Card *playCard(Card *input = nullptr, bool specified_input = false);

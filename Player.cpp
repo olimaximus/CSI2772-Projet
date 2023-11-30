@@ -33,7 +33,7 @@ Card *Player::playCard(Card *input, bool specified_input) {
     char user_input[2];
 
     // Vérifier si le joueur a déjà la chaine
-    for (Chain_Base *chain : pChains) {
+    for (Chain_Base *chain : playerChains) {
       if (chain->getChainType() == card->getName()) {
         ExistingChain = true;
         new_chain = chain;
@@ -75,20 +75,20 @@ Card *Player::playCard(Card *input, bool specified_input) {
       }
 
       // Si le joueur a 3 chaines
-      if (pChains.size() == MAX_NUM_CHAINS) {
+      if (playerChains.size() == MAX_NUM_CHAINS) {
         cout << "Player " << playerName << " already has 3 chains." << endl;
         sellChain();
         startNewChain(new_chain, card, specified_input);
 
       }
       // Si le joueur a moins de chaines qu'il en a droit
-      else if (pChains.size() < ALLOWED_CHAINS) {
+      else if (playerChains.size() < ALLOWED_CHAINS) {
         startNewChain(new_chain, card, specified_input);
       }
       // Si le joueur a le deux chaines et qu'il n'a pas acheté la 3e
       else {
         cout << "Player " << playerName << " already has 2 chains." << endl;
-        if (pCoins >= 3) {
+        if (playerCoins >= 3) {
           cout << endl << "> Do you want to buy a third chain ? (y/n)" << endl;
           cin >> user_input;
           if (user_input[0] == 'y') {
@@ -121,8 +121,8 @@ int Player::getMaxNumChains() { return ALLOWED_CHAINS; }
 //Retourne le nombre de chaine non nulle que le joueur possède
 int Player::getNumChains() {
   int counter = 0;
-  for (int i = 0; i < pChains.size(); i++) {
-    if ((pChains.at(i))->getSize() > 0)
+  for (int i = 0; i < playerChains.size(); i++) {
+    if ((playerChains.at(i))->getSize() > 0)
       counter++;
   }
   return counter;
@@ -135,9 +135,9 @@ int Player::getNumChains() {
  *
  */
 void Player::buyThirdChain() {
-  if (pCoins >= 3) {
-    if (pChains.size() < MAX_NUM_CHAINS) {
-      pCoins -= 3;
+  if (playerCoins >= 3) {
+    if (playerChains.size() < MAX_NUM_CHAINS) {
+      playerCoins -= 3;
       ALLOWED_CHAINS = 3;
 
     } else {
@@ -179,7 +179,7 @@ Card *Player::removeCard(int pos) {
 }
 
 //Retourne le nombre de pièces d'un joueur
-int Player::getNumCoins() { return pCoins; }
+int Player::getNumCoins() { return playerCoins; }
 
 /**
  * @brief Opérateur d'insertion pour afficher un joueur
@@ -189,8 +189,8 @@ int Player::getNumCoins() { return pCoins; }
  * @return ostream
  */
 ostream &operator<<(ostream &output, const Player &player) {
-  output << player.playerName << setw(5) << player.pCoins << " coins " << endl;
-  for (auto chain : player.pChains) {
+  output << player.playerName << setw(5) << player.playerCoins << " coins " << endl;
+  for (auto chain : player.playerChains) {
     output << *chain;
     output << endl;
   }
@@ -217,7 +217,7 @@ void Player::savePlayer(int p_id) {
   file << playerName << endl;
 
   // La deuxième ligne est le nombre de pièces
-  file << pCoins << endl;
+  file << playerCoins << endl;
 
   // Sauvegarder la main
   playerHand->saveHand(file);
@@ -225,9 +225,9 @@ void Player::savePlayer(int p_id) {
   // Sauvegarder les chaines
   file << endl << "-chains" << endl;
 
-  for (int i = 0; i < pChains.size(); i++) {
+  for (int i = 0; i < playerChains.size(); i++) {
     file << endl << "---" << endl;
-    pChains.at(i)->saveChain(file);
+    playerChains.at(i)->saveChain(file);
   }
 
   file << endl << "-end-chains" << endl;
@@ -241,7 +241,7 @@ void Player::savePlayer(int p_id) {
 Hand *Player::getHand() { return playerHand; }
 
 //Retourne les chaines du joueur
-vector<Chain_Base *> *Player::getChains() { return &pChains; }
+vector<Chain_Base *> *Player::getChains() { return &playerChains; }
 
 //Vendre une chaine
 void Player::sellChain() {
@@ -249,15 +249,15 @@ void Player::sellChain() {
   bool firstTimeInLoop = true;
 
   // Valider l'entrée
-  while (idx < 0 || idx >= pChains.size()) {
+  while (idx < 0 || idx >= playerChains.size()) {
     if (!firstTimeInLoop)
       cout << "Index " << idx << " is out of range." << endl;
 
     cout << "What chain do you want to sell?" << endl;
 
-    for (int i = 0; i < pChains.size(); i++) {
-      cout << "[" << i << "] " << pChains.at(i)->getChainType() << " ("
-           << pChains.at(i)->getSize() << " Cards)" << endl;
+    for (int i = 0; i < playerChains.size(); i++) {
+      cout << "[" << i << "] " << playerChains.at(i)->getChainType() << " ("
+           << playerChains.at(i)->getSize() << " Cards)" << endl;
     }
 
     cout << "Enter the corresponding index : ";
@@ -266,57 +266,57 @@ void Player::sellChain() {
     firstTimeInLoop = false;
   }
 
-  string chainType = pChains.at(idx)->getChainType();
+  string chainType = playerChains.at(idx)->getChainType();
 
   cout << "Selling Chain of type : " << chainType << endl;
 
   // Obtenir le bon nombre de pièces
 
   if (chainType == "Blue") {
-    Chain<Blue> *chain = dynamic_cast<Chain<Blue> *>(pChains.at(idx));
+    Chain<Blue> *chain = dynamic_cast<Chain<Blue> *>(playerChains.at(idx));
     cout << "Obtaining " << chain->sell() << " coins" << endl;
-    pCoins += chain->sell();
+    playerCoins += chain->sell();
   } else if (chainType == "Chili") {
-    Chain<Chili> *chain = dynamic_cast<Chain<Chili> *>(pChains.at(idx));
+    Chain<Chili> *chain = dynamic_cast<Chain<Chili> *>(playerChains.at(idx));
     cout << "Obtaining " << chain->sell() << " coins" << endl;
-    pCoins += chain->sell();
+    playerCoins += chain->sell();
   } else if (chainType == "Stink") {
-    Chain<Stink> *chain = dynamic_cast<Chain<Stink> *>(pChains.at(idx));
+    Chain<Stink> *chain = dynamic_cast<Chain<Stink> *>(playerChains.at(idx));
     cout << "Obtaining " << chain->sell() << " coins" << endl;
-    pCoins += chain->sell();
+    playerCoins += chain->sell();
   } else if (chainType == "Green") {
-    Chain<Green> *chain = dynamic_cast<Chain<Green> *>(pChains.at(idx));
+    Chain<Green> *chain = dynamic_cast<Chain<Green> *>(playerChains.at(idx));
     cout << "Obtaining " << chain->sell() << " coins" << endl;
-    pCoins += chain->sell();
+    playerCoins += chain->sell();
   } else if (chainType == "soy") {
-    Chain<soy> *chain = dynamic_cast<Chain<soy> *>(pChains.at(idx));
+    Chain<soy> *chain = dynamic_cast<Chain<soy> *>(playerChains.at(idx));
     cout << "Obtaining " << chain->sell() << " coins" << endl;
-    pCoins += chain->sell();
+    playerCoins += chain->sell();
   } else if (chainType == "black") {
-    Chain<black> *chain = dynamic_cast<Chain<black> *>(pChains.at(idx));
+    Chain<black> *chain = dynamic_cast<Chain<black> *>(playerChains.at(idx));
     cout << "Obtaining " << chain->sell() << " coins" << endl;
-    pCoins += chain->sell();
+    playerCoins += chain->sell();
   } else if (chainType == "Red") {
-    Chain<Red> *chain = dynamic_cast<Chain<Red> *>(pChains.at(idx));
+    Chain<Red> *chain = dynamic_cast<Chain<Red> *>(playerChains.at(idx));
     cout << "Obtaining " << chain->sell() << " coins" << endl;
-    pCoins += chain->sell();
+    playerCoins += chain->sell();
   } else if (chainType == "garden") {
-    Chain<garden> *chain = dynamic_cast<Chain<garden> *>(pChains.at(idx));
+    Chain<garden> *chain = dynamic_cast<Chain<garden> *>(playerChains.at(idx));
     cout << "Obtaining " << chain->sell() << " coins" << endl;
-    pCoins += chain->sell();
+    playerCoins += chain->sell();
   } else {
     cout << "(playCard) Impossible value of card : " << chainType << endl;
     exit(1);
   }
 
-  pChains.erase(pChains.begin() + idx); // Enlever la chaine correspondante
+  playerChains.erase(playerChains.begin() + idx); // Enlever la chaine correspondante
 }
 
 //Commencer une nouvelle chaine
 void Player::startNewChain(Chain_Base *new_chain, Card *card,
                            bool specifiedInput) {
   *new_chain += card;
-  pChains.push_back(new_chain);
+  playerChains.push_back(new_chain);
 
   if ((*new_chain).getSize() == 0) { // Mettre à jour le type de chaine
     (*new_chain).setChainType(card->getName());
