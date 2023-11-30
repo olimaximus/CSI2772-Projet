@@ -4,19 +4,19 @@
  * @brief Retourne true si le joueur a gagné et transmets le nom du gagnant par
  * référence
  *
- * @param pName
+ * @param playerName
  * @return bool
  */
-bool Table::win(string &pName) {
+bool Table::win(string &playerName) {
   bool win = false;
   if (deck->size() == 0) {
 
     if (p1->getNumCoins() > p2->getNumCoins()) {
-      pName = p1->getName();
+      playerName = p1->getName();
     } else if (p1->getNumCoins() < p2->getNumCoins()) {
-      pName = p2->getName();
+      playerName = p2->getName();
     } else { //  Égalité
-      pName = "Tie";
+      playerName = "Tie";
     }
 
     win = true;

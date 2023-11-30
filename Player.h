@@ -10,8 +10,8 @@
 using namespace std;
 
 class Player {
-  string pName;
-  Hand *pHand;
+  string playerName;
+  Hand *playerHand;
   vector<Chain_Base *> pChains;
   int pCoins;
   const int MAX_NUM_CHAINS;
@@ -24,9 +24,9 @@ public:
    * @param name
    */
   Player(string &name) : MAX_NUM_CHAINS(3), ALLOWED_CHAINS(2) {
-    pName = name;
+    playerName = name;
     pCoins = 0;
-    pHand = new Hand();
+    playerHand = new Hand();
   };
   /**
    * @brief Constructeur de Player à partir d'un istream
@@ -39,7 +39,7 @@ public:
     string line;
     string chainType;
     Card *card = nullptr;
-    pHand = new Hand();
+    playerHand = new Hand();
     int chain_idx = -1; // Nombre de chaine ayant été initialisées
     int count = 0;      // Nombre de cartes ayant été reçues
     bool nameInitialized = false;
@@ -57,7 +57,7 @@ public:
       }
       // Initialiser le nom
       if (!nameInitialized) {
-        pName = data;
+        playerName = data;
         nameInitialized = true;
         continue;
       }
@@ -99,7 +99,7 @@ public:
             exit(1);
           }
           if (card != nullptr)
-            *pHand += card;
+            *playerHand += card;
         }
       }
 
@@ -192,7 +192,7 @@ public:
    * @brief Destructeur de Player
    *
    */
-  ~Player() { delete pHand; };
+  ~Player() { delete playerHand; };
 
   /**
    * @brief Opérateur += pour ajouter des pièces à un joueur
@@ -236,10 +236,10 @@ public:
    */
   void printHand(ostream &output, bool b) {
     if (!b) {
-      output << pHand->top()->getName()[0] << endl;
+      output << playerHand->top()->getName()[0] << endl;
     } else {
-      for (int i = 0; i < pHand->numCards(); i++) {
-        output << pHand->getCard(i)->getName()[0] << " ";
+      for (int i = 0; i < playerHand->numCards(); i++) {
+        output << playerHand->getCard(i)->getName()[0] << " ";
       }
       output << endl;
     }

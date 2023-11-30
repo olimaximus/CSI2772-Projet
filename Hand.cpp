@@ -2,16 +2,16 @@
 
 //Retourne et enlève la première carte de la main
 Card *Hand::play() {
-  Card *card = pHand.front();
-  pHand.pop();
+  Card *card = playerHand.front();
+  playerHand.pop();
   return card;
 }
 
 //Retourne la première carte de la main sans l'enlever
-Card *Hand::top() { return pHand.front(); }
+Card *Hand::top() { return playerHand.front(); }
 
 //Retourne le nombre de cartes dans la main
-int Hand::numCards() { return pHand.size(); }
+int Hand::numCards() { return playerHand.size(); }
 
 /**
  * @brief Retourne la carte à l'index choisi
@@ -21,31 +21,31 @@ int Hand::numCards() { return pHand.size(); }
  */
 Card *Hand::getCard(int pos) {
   Card *card = nullptr; // Carte à retourner
-  if (pos > pHand.size() - 1) {
-    cout << "(getCard) The index " << pos
-         << " is out of range for a hand of size: " << pHand.size() << endl;
+  if (pos > playerHand.size() - 1) {
+    std::cout << "(getCard) Unable to use index " << pos
+          << ". The current size of the hand is " << playerHand.size() << std::endl;
   } else {
     queue<Card *, list<Card *>> temp; // Main du joueur temporaire
-    Card *temp_card = nullptr;        // Carte temporaire
-    int find_idx = 0;
-    while (!pHand.empty()) {
+    Card *tempCard = nullptr;        // Carte temporaire
+    int locate_index = 0;
+    while (!playerHand.empty()) {
 
-      if (find_idx++ == pos) {
-        card = pHand.front(); // Garder la carte voulue
+      if (locate_index++ == pos) {
+        card = playerHand.front(); // Garder la carte voulue
       }
 
       // Mettre toutes les cartes dans la main temporaire
-      temp_card = pHand.front();
-      pHand.pop();
-      temp.push(temp_card);
+      tempCard = playerHand.front();
+      playerHand.pop();
+      temp.push(tempCard);
     }
 
     // Remettre les cartes dans la main
     while (!temp.empty()) {
 
-      temp_card = temp.front();
+      tempCard = temp.front();
       temp.pop();
-      pHand.push(temp_card);
+      playerHand.push(tempCard);
     }
   }
 
@@ -70,11 +70,11 @@ ostream &operator<<(ostream &output, Hand &hand) {
 //Écrire la main dans un fichier
 void Hand::saveHand(ofstream &filename) {
   Card *card = nullptr;
-  while (!pHand.empty()) {    // Pour chaque carte de la main
-    card = pHand.front();     // Obtenir une carte
+  while (!playerHand.empty()) {    // Pour chaque carte de la main
+    card = playerHand.front();     // Obtenir une carte
     card->saveCard(filename); // Sauvegarder la carte
     filename << endl;
-    pHand.pop();
+    playerHand.pop();
   }
 
   cout << "Saved Hand successfully" << endl;
@@ -85,4 +85,4 @@ void Hand::saveHand(ofstream &filename) {
  *
  * @return queue <Card*, list<Card*>>
  */
-queue<Card *, list<Card *>> *Hand::getListOfCards() { return &pHand; }
+queue<Card *, list<Card *>> *Hand::getListOfCards() { return &playerHand; }

@@ -15,11 +15,11 @@ class CardFactory;
 
 class Hand {
 private:
-  queue<Card *, list<Card *>> pHand; // main du joueur
+  queue<Card *, list<Card *>> playerHand; // main du joueur
   // vider la liste de la main du joueur
   void clearHand() {
-    while (!pHand.empty()) {
-      pHand.pop();
+    while (!playerHand.empty()) {
+      playerHand.pop();
     }
   }
 
@@ -71,7 +71,7 @@ public:
       }
 
       if (card != nullptr)
-        pHand.push(card);
+        playerHand.push(card);
     }
 
     cout << "Initialized Hand with " << count
@@ -84,7 +84,7 @@ public:
    * @return Hand&
    */
   Hand &operator+=(Card *card) {
-    pHand.push(card);
+    playerHand.push(card);
     return *this;
   };
   Card *play();
@@ -102,14 +102,14 @@ public:
     queue<Card *, list<Card *>> temp; // Main du joueur temporaire
     Card *temp_card = nullptr;        // Carte temporaire
     int find_idx = 0;
-    while (!pHand.empty()) {
+    while (!playerHand.empty()) {
       if (find_idx++ == pos) {
-        card = pHand.front(); // Garder la carte voulue
-        pHand.pop();
+        card = playerHand.front(); // Garder la carte voulue
+        playerHand.pop();
       } else // Mettre toutes les autres cartes dans la main temporaire
       {
-        temp_card = pHand.front();
-        pHand.pop();
+        temp_card = playerHand.front();
+        playerHand.pop();
         temp.push(temp_card);
       }
     }
@@ -119,7 +119,7 @@ public:
 
       temp_card = temp.front();
       temp.pop();
-      pHand.push(temp_card);
+      playerHand.push(temp_card);
     }
     return card; // Retourner la carte voulue
   };

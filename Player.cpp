@@ -5,10 +5,10 @@
 
 
 //Obtenir le nom d'un joueur
-string Player::getName() { return this->pName; }
+string Player::getName() { return this->playerName; }
 
 //Obtenir le nombre de cartes dans la main d'un joueur
-int Player::getNumCards() { return pHand->numCards(); }
+int Player::getNumCards() { return playerHand->numCards(); }
 
 /**
  * @brief Jouer une carte vers une chaine
@@ -19,12 +19,12 @@ int Player::getNumCards() { return pHand->numCards(); }
  */
 Card *Player::playCard(Card *input, bool specified_input) {
   Card *card = nullptr;
-  if (pHand->numCards() < 0 && !specified_input)
-    cout << "(PlayCard) Player is out of cards : " << pName << endl;
+  if (playerHand->numCards() < 0 && !specified_input)
+    cout << "(PlayCard) Player is out of cards : " << playerName << endl;
   else {
 
     if (!specified_input)
-      card = pHand->top();
+      card = playerHand->top();
     else
       card = input;
 
@@ -38,10 +38,10 @@ Card *Player::playCard(Card *input, bool specified_input) {
         ExistingChain = true;
         new_chain = chain;
         if (!specified_input)
-          card = pHand->play();
+          card = playerHand->play();
 
         if (card == nullptr)
-          card = pHand->play();
+          card = playerHand->play();
 
         *new_chain += card;
         break;
@@ -76,7 +76,7 @@ Card *Player::playCard(Card *input, bool specified_input) {
 
       // Si le joueur a 3 chaines
       if (pChains.size() == MAX_NUM_CHAINS) {
-        cout << "Player " << pName << " already has 3 chains." << endl;
+        cout << "Player " << playerName << " already has 3 chains." << endl;
         sellChain();
         startNewChain(new_chain, card, specified_input);
 
@@ -87,7 +87,7 @@ Card *Player::playCard(Card *input, bool specified_input) {
       }
       // Si le joueur a le deux chaines et qu'il n'a pas acheté la 3e
       else {
-        cout << "Player " << pName << " already has 2 chains." << endl;
+        cout << "Player " << playerName << " already has 2 chains." << endl;
         if (pCoins >= 3) {
           cout << endl << "> Do you want to buy a third chain ? (y/n)" << endl;
           cin >> user_input;
@@ -155,7 +155,7 @@ void Player::buyThirdChain() {
  *
  * @param card
  */
-void Player::takeCard(Card *card) { *pHand += card; }
+void Player::takeCard(Card *card) { *playerHand += card; }
 
 /**
  * @brief Enlever une carte à une position donnée de la main du joueur
@@ -166,14 +166,14 @@ void Player::takeCard(Card *card) { *pHand += card; }
  */
 Card *Player::removeCard(int pos) {
   Card *card = nullptr;
-  if (pos > pHand->numCards() - 1) {
-    cout << "Please specify the proper index to remove from the pHand. "
+  if (pos > playerHand->numCards() - 1) {
+    cout << "Please specify the proper index to remove from the playerHand. "
          << endl;
     cout << "Entered idx : " << pos << endl;
-    cout << "Current size of hands : " << pHand->numCards() << endl;
+    cout << "Current size of hands : " << playerHand->numCards() << endl;
     cout << "Card not removed." << endl;
   } else {
-    card = (*pHand)[pos];
+    card = (*playerHand)[pos];
   }
   return card;
 }
@@ -189,7 +189,7 @@ int Player::getNumCoins() { return pCoins; }
  * @return ostream
  */
 ostream &operator<<(ostream &output, const Player &player) {
-  output << player.pName << setw(5) << player.pCoins << " coins " << endl;
+  output << player.playerName << setw(5) << player.pCoins << " coins " << endl;
   for (auto chain : player.pChains) {
     output << *chain;
     output << endl;
@@ -214,13 +214,13 @@ void Player::savePlayer(int p_id) {
   file.open(filename, ios::trunc);
 
   // La première ligne est le nom du joueur
-  file << pName << endl;
+  file << playerName << endl;
 
   // La deuxième ligne est le nombre de pièces
   file << pCoins << endl;
 
   // Sauvegarder la main
-  pHand->saveHand(file);
+  playerHand->saveHand(file);
 
   // Sauvegarder les chaines
   file << endl << "-chains" << endl;
@@ -238,7 +238,7 @@ void Player::savePlayer(int p_id) {
 }
 
 //Retourne la main du joueur
-Hand *Player::getHand() { return pHand; }
+Hand *Player::getHand() { return playerHand; }
 
 //Retourne les chaines du joueur
 vector<Chain_Base *> *Player::getChains() { return &pChains; }
@@ -323,5 +323,5 @@ void Player::startNewChain(Chain_Base *new_chain, Card *card,
   }
 
   if (!specifiedInput)
-    pHand->play(); // Enlever la carte de la main, si c'est le cas
+    playerHand->play(); // Enlever la carte de la main, si c'est le cas
 }
