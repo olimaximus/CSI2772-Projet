@@ -57,7 +57,7 @@ public:
       else if (data == "g")
         card = new garden;
       else {
-        cout << "(TradeArea Constructor) Impossible value of card : " << data
+        cout << "(Constructeur d'espace d'echange) Valeur impossible de carte: " << data
              << endl;
         exit(1);
       }
@@ -65,8 +65,8 @@ public:
         tradeAr.push_back(card);
     }
 
-    cout << "Initialized TradeArea with " << count
-         << " cards from file successfully." << endl;
+    cout << "Espace d'echange initialise avec " << count
+         << " cartes" << endl;
   };
   /**
    * @brief Opérateur += pour ajouter une carte au TradeArea
@@ -81,8 +81,8 @@ public:
       if (tradeAr.size() < 3) {
         tradeAr.push_back(card);
       } else {
-        cout << "The card [" << card->getName()
-             << "] couldn't be added to the TradeArea." << endl;
+        cout << "La carte " << card->getName()
+             << " n'a pas pu etre ajoutee a l'espace d'echange" << endl;
       }
     }
     return *this;

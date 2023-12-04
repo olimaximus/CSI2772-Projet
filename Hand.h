@@ -65,7 +65,7 @@ public:
       else if (data == "g")
         card = new garden;
       else {
-        cout << "(Hand Constructor) Impossible value of card : " << data
+        cout << "(Constructeur de main) Valeur impossible de carte: " << data
              << endl;
         exit(1);
       }
@@ -74,8 +74,8 @@ public:
         playerHand.push(card);
     }
 
-    cout << "Initialized Hand with " << count
-         << " cards from file successfully." << endl;
+    cout << "Main initialisee avec " << count
+         << " cartes" << endl;
   };
   /**
    * @brief Opérateur += pour ajouter une carte à la main du joueur

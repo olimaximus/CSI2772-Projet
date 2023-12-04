@@ -58,5 +58,5 @@ void DiscardPile::saveDiscardPile(ofstream &filename) {
     this->at(i)->saveCard(filename);
     filename << endl;
   }
-  cout << "Saved Discard Pile successfully" << endl;
+  cout << "Pile de discarte sauvegardee" << endl;
 }

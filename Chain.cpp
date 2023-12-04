@@ -27,7 +27,7 @@ void Chain_Base::saveChain(ofstream &filename) {
     filename << endl;
   }
 
-  cout << "Saved Chain successfully" << endl;
+  cout << "Chaine sauvegardee" << endl;
 }
 
 /**

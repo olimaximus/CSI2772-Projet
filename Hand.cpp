@@ -22,8 +22,8 @@ int Hand::numCards() { return playerHand.size(); }
 Card *Hand::getCard(int pos) {
   Card *card = nullptr; // Carte à retourner
   if (pos > playerHand.size() - 1) {
-    std::cout << "(getCard) Unable to use index " << pos
-          << ". The current size of the hand is " << playerHand.size() << std::endl;
+    std::cout << "(getCard) Incapable d'utiliser l'index " << pos
+          << ". La taille de la main est de " << playerHand.size() << std::endl;
   } else {
     queue<Card *, list<Card *>> temp; // Main du joueur temporaire
     Card *tempCard = nullptr;        // Carte temporaire
@@ -77,7 +77,7 @@ void Hand::saveHand(ofstream &filename) {
     playerHand.pop();
   }
 
-  cout << "Saved Hand successfully" << endl;
+  cout << "Main sauvegardee" << endl;
 }
 
 /**

@@ -57,7 +57,7 @@ public:
       else if (data == "g")
         card = new garden;
       else {
-        cout << "(DiscardPile Constructor) Impossible value of card : " << data
+        cout << "(Constructeur de pile de discarte) Valeur impossible de carte: " << data
              << endl;
         exit(1);
       }
@@ -65,8 +65,8 @@ public:
         this->push_back(card);
     }
 
-    cout << "Initialized DiscardPile with " << count
-         << " cards from file successfully." << endl;
+    cout << "Pile de discarte initialisee avec " << count
+         << " cartes" << endl;
   };
 
   /**

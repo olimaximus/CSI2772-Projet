@@ -73,7 +73,7 @@ void TradeArea::saveTradeArea(ofstream &filename) {
     filename << endl;
   }
 
-  cout << "Saved Trade Area successfully" << endl;
+  cout << "Espace d'echange sauvegarde" << endl;
 }
 
 /**

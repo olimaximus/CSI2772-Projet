@@ -57,7 +57,7 @@ public:
       else if (data == "g")
         card = new garden;
       else {
-        cout << "(Deck Constructor) Impossible value of card : " << data
+        cout << "(Constructeur du paquet) Valeur impossible de carte: " << data
              << endl;
         exit(1);
       }
@@ -65,8 +65,8 @@ public:
         this->push_back(card);
     }
 
-    cout << "Initialized Deck with " << count
-         << " cards from file successfully." << endl;
+    cout << "Paquet initialise avec " << count
+         << " cartes" << endl;
   };
   /**
    * @brief Constructeur de recopie de Deck
@@ -80,7 +80,7 @@ public:
          i++) { // Recopier chaque carte dans le paquet courant
       this->push_back(d.at(i));
     }
-    cout << "Deck of size " << d.size() << " copied successfully" << endl;
+    cout << "Paquet copie" << endl;
   }
 
   /**

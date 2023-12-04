@@ -81,7 +81,7 @@ public:
       else if (data == "g")
         card = new garden;
       else {
-        cout << "(Chain Constructor) Impossible value of card : " << data
+        cout << "(Constructeur de chaine) Valeur impossible de carte: " << data
              << endl;
         exit(1);
       }
@@ -89,8 +89,8 @@ public:
         (*this) += card; // Ajouter la carte
     }
 
-    cout << "Initialized Chain with " << count
-         << " cards from file successfully." << endl;
+    cout << "Chaine initialisee avec " << count
+         << " cartes" << endl;
   };
   /**
    * @brief Opérateur += pour ajouter une carte à une chaine

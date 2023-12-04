@@ -49,5 +49,5 @@ void Deck::saveDeck(ofstream &filename) {
     this->at(i)->saveCard(filename);
     filename << endl;
   }
-  cout << "Saved Deck successfully" << endl;
+  cout << "Paquet sauvegarde" << endl;
 }

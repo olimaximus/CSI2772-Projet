@@ -16,7 +16,7 @@ bool Table::win(string &playerName) {
     } else if (p1->getNumCoins() < p2->getNumCoins()) {
       playerName = p2->getName();
     } else { //  Égalité
-      playerName = "Tie";
+      playerName = "Partie nulle";
     }
 
     win = true;
@@ -52,10 +52,10 @@ Player *Table::getPlayer(int id) { return id == 0 ? p1 : p2; }
  */
 ostream &operator<<(ostream &output, const Table &tb) {
 
-  output << "Player 1:" << endl << endl << *(tb.p1) << endl;
-  output << "Player 2:" << endl << endl << *(tb.p2) << endl;
-  output << "Discard Pile (Top): " << *tb.dp << endl << endl;
-  output << "Trade Area: " << *tb.tradeAr << endl << endl;
+  output << "Joueur 1:" << endl << endl << *(tb.p1) << endl;
+  output << "Joueur 2:" << endl << endl << *(tb.p2) << endl;
+  output << "Dessus de la pile de discarte: " << *tb.dp << endl << endl;
+  output << "Espace d'echange: " << *tb.tradeAr << endl << endl;
   return output;
 };
 
@@ -118,7 +118,7 @@ void Table::reloadDeck() {
     file.close();
   } else { // Fichier manquant
     deck = cf->getDeck();
-    cout << "Deck.txt not found: Deck generated from CardFactory." << endl;
+    cout << "Deck.txt manquant: Paquet genere a partir de CardFactory." << endl;
   }
 }
 
@@ -130,7 +130,7 @@ void Table::reloadDiscardPile() {
     file.close();
   } else { // Fichier manquant
     dp = new DiscardPile;
-    cout << "DiscardPile.txt not found: Empty DiscardPile created." << endl;
+    cout << "DiscardPile.txt manquant: Pile de discarte vide cree." << endl;
   }
 }
 
@@ -143,7 +143,7 @@ void Table::reloadTradeArea() {
   } else {
     // file not found
     tradeAr = new TradeArea;
-    cout << "TradeArea.txt not found: Empty TradeArea created." << endl;
+    cout << "TradeArea.txt manquant: Espace d'echange vide cree." << endl;
   }
 }
 

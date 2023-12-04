@@ -17,7 +17,7 @@ Blue::Blue(string name) { this->name = name; }
  */
 int Blue::getCardsPerCoin(int coins) {
   if (coins < 1 || coins > 4) {
-    cout << "(Blue) - Impossible value of coins passed to getCardsPerCoin : "
+    cout << "(Blue) - Valeur impossible passee a getCardsPerCoin(): "
          << coins << endl;
     return -1;
   }
@@ -47,7 +47,7 @@ string Chili::getName() { return this->name; }
  */
 int Chili::getCardsPerCoin(int coins) {
   if (coins < 1 || coins > 4) {
-    cout << "(Chili) - Impossible value of coins passed to getCardsPerCoin : "
+    cout << "(Chili) - Valeur impossible passee a getCardsPerCoin(): "
          << coins << endl;
     return -1;
   }
@@ -74,7 +74,7 @@ string Stink::getName() { return this->name; }
  */
 int Stink::getCardsPerCoin(int coins) {
   if (coins < 1 || coins > 4) {
-    cout << "(Stink) - Impossible value of coins passed to getCardsPerCoin : "
+    cout << "(Stink) - Valeur impossible passee a getCardsPerCoin(): "
          << coins << endl;
     return -1;
   }
@@ -101,7 +101,7 @@ string Green::getName() { return this->name; }
  */
 int Green::getCardsPerCoin(int coins) {
   if (coins < 1 || coins > 4) {
-    cout << "(Green) - Impossible value of coins passed to getCardsPerCoin : "
+    cout << "(Green) - Valeur impossible passee a getCardsPerCoin(): "
          << coins << endl;
     return -1;
   }
@@ -130,7 +130,7 @@ string soy::getName() { return this->name; }
  */
 int soy::getCardsPerCoin(int coins) {
   if (coins < 1 || coins > 4) {
-    cout << "(soy) - Impossible value of coins passed to getCardsPerCoin : "
+    cout << "(soy) - Valeur impossible passee a getCardsPerCoin(): "
          << coins << endl;
     return -1;
   }
@@ -159,7 +159,7 @@ string black::getName() { return this->name; }
  */
 int black::getCardsPerCoin(int coins) {
   if (coins < 1 || coins > 4) {
-    cout << "(black) - Impossible value of coins passed to getCardsPerCoin : "
+    cout << "(black) - Valeur impossible passee a getCardsPerCoin(): "
          << coins << endl;
     return -1;
   }
@@ -188,7 +188,7 @@ string Red::getName() { return this->name; }
  */
 int Red::getCardsPerCoin(int coins) {
   if (coins < 1 || coins > 4) {
-    cout << "(Red) - Impossible value of coins passed to getCardsPerCoin : "
+    cout << "(Red) - Valeur impossible passee a getCardsPerCoin(): "
          << coins << endl;
     return -1;
   }
@@ -215,7 +215,7 @@ string garden::getName() { return this->name; }
  */
 int garden::getCardsPerCoin(int coins) {
   if (coins < 1 || coins > 4) {
-    cout << "(garden) - Impossible value of coins passed to getCardsPerCoin : "
+    cout << "(garden) - Valeur impossible passee a getCardsPerCoin(): "
          << coins << endl;
     return -1;
   }

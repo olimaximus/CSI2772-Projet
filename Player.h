@@ -94,7 +94,7 @@ public:
           else if (data == "g")
             card = new garden;
           else {
-            cout << "(Player Constructor) Impossible value of card : " << data
+            cout << "(Constructeur de joueur) Valeur impossible de carte: " << data
                  << endl;
             exit(1);
           }
@@ -137,7 +137,7 @@ public:
               else if (chainType == "garden")
                 new_chain = new Chain<garden>;
               else {
-                cout << "(Player Constructor) Impossible value of chain type : "
+                cout << "(Constructeur de joueur) Valeur impossible de chaine: "
                      << chainType << endl;
                 new_chain = nullptr;
                 exit(1);
@@ -168,15 +168,15 @@ public:
               else if (data == "g")
                 card = new garden;
               else {
-                cout << "(Player Constructor) Impossible value of card : "
+                cout << "(Constructeur de joueur) Valeur impossible de carte: "
                      << data << endl;
                 exit(1);
               }
               if (chain_idx != -1 && card != nullptr) {
                 *(playerChains.at(chain_idx)) += card;
               } else {
-                cout << "(Player Constructor) No chains have been added. "
-                        "chain_idx : "
+                cout << "(Constructeur de joueur) Aucune chaine n'a ete ajoutee. "
+                        "index: "
                      << chain_idx << endl;
               }
             }
@@ -185,7 +185,7 @@ public:
       }
     }
 
-    cout << "Initialised Player from file successfully" << endl;
+    cout << "Joueur initialise a partir du fichier" << endl;
   };
 
   /**
