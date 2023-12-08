@@ -1,14 +1,11 @@
-
-#ifndef CHAIN_H
-#define CHAIN_H
-
-#include "Card.h"
 #include <cstdlib>
 #include <sstream>
 #include <stdexcept>
 #include <typeinfo>
 #include <vector>
-
+#ifndef CHAIN_H
+#define CHAIN_H
+#include "Card.h"
 
 using namespace std;
 

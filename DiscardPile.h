@@ -2,11 +2,8 @@
 #include <iostream>
 #include <sstream>
 #include <vector>
-
-
 #ifndef DISCARD_PILE_H
 #define DISCARD_PILE_H
-
 #include "Card.h"
 
 using namespace std;

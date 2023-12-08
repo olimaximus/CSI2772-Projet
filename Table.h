@@ -1,12 +1,10 @@
 #ifndef TABLE_H
 #define TABLE_H
-
 #include "CardFactory.h"
 #include "Deck.h"
 #include "DiscardPile.h"
 #include "Player.h"
 #include "TradeArea.h"
-
 
 using namespace std;
 

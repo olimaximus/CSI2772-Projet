@@ -1,11 +1,9 @@
-#ifndef TRADEAREA_H
-#define TRADEAREA_H
-
-#include "Card.h"
 #include <cstdlib>
 #include <list>
 #include <sstream>
-
+#ifndef TRADEAREA_H
+#define TRADEAREA_H
+#include "Card.h"
 
 using namespace std;
 

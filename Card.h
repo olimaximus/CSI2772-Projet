@@ -1,8 +1,6 @@
 #include <climits>
 #include <fstream>
 #include <iostream>
-
-
 #ifndef CARD_H
 #define CARD_H
 

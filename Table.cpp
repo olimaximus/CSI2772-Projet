@@ -52,9 +52,14 @@ Player *Table::getPlayer(int id) { return id == 0 ? p1 : p2; }
  */
 ostream &operator<<(ostream &output, const Table &tb) {
 
+  // Imprimer les joueurs
   output << "Joueur 1:" << endl << endl << *(tb.p1) << endl;
   output << "Joueur 2:" << endl << endl << *(tb.p2) << endl;
+
+  // Imprimer la DiscardPile
   output << "Dessus de la pile de discarte: " << *tb.dp << endl << endl;
+
+  // Imprimer le TradeArea
   output << "Espace d'echange: " << *tb.tradeAr << endl << endl;
   return output;
 };
@@ -66,22 +71,26 @@ ostream &operator<<(ostream &output, const Table &tb) {
  */
 void Table::saveTable() {
 
+  // Sauvegarder les joueurs
+  p1->savePlayer(1);
+  p2->savePlayer(2);
+
   ofstream file;
 
-  file.open("Deck.txt", ios::trunc);
-  deck->saveDeck(file);
-  file.close();
-
+  // Sauvegarder la DiscardPile
   file.open("DiscardPile.txt", ios::trunc);
   dp->saveDiscardPile(file);
   file.close();
 
+  // Sauvegarder le TradeArea
   file.open("TradeArea.txt", ios::trunc);
   tradeAr->saveTradeArea(file);
   file.close();
 
-  p1->savePlayer(1);
-  p2->savePlayer(2);
+  // Sauvegarder le deck
+  file.open("Deck.txt", ios::trunc);
+  deck->saveDeck(file);
+  file.close();
 }
 
 /**
@@ -92,8 +101,12 @@ void Table::saveTable() {
 void Table::reloadPlayer(int p_id) {
   ifstream file;
   char id[2];
+
+  // Formatter le id et obtenir le nom du fichier
   sprintf(id, "%d", p_id);
   string filename = "Player" + string(id) + ".txt";
+
+  // Recréer le bon joueur
   file.open(filename);
   if (file.is_open()) {
     if (p_id == 1) {
@@ -106,11 +119,8 @@ void Table::reloadPlayer(int p_id) {
   file.close();
 }
 
-/**
- * @brief Lire les informations du Deck dans le fichier de sauvegarde
- *
- *
- */
+
+//Lire les informations du Deck dans le fichier de sauvegarde
 void Table::reloadDeck() {
   ifstream file("Deck.txt");
   if (file.is_open()) {
@@ -158,9 +168,5 @@ Deck *Table::getDeck() {
 //Retourne la DiscardPile de la Table
 DiscardPile *Table::getDiscardPile() { return dp; }
 
-/**
- * @brief Retourne le TradeArea de la Table
- *
- * @return TradeArea*
- */
+//Retourne le TradeArea de la Table
 TradeArea *Table::getTradeArea() { return tradeAr; }

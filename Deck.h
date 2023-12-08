@@ -1,13 +1,9 @@
-
 #include <cstdlib>
 #include <iostream>
 #include <sstream>
 #include <vector>
-
-
 #ifndef DECK_H
 #define DECK_H
-
 #include "Card.h"
 
 using namespace std;

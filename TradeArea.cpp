@@ -7,10 +7,10 @@
  * @return Card*
  */
 Card *TradeArea::trade(string card) {
-
   Card *cardFound;
   list<Card *>::iterator i;
 
+  // Chercher la carte dans le TradeArea
   for (i = tradeAr.begin(); i != tradeAr.end(); i++) {
     if ((*i)->getName() == card) {
       cardFound = *i;
@@ -30,9 +30,10 @@ Card *TradeArea::trade(string card) {
  * @return false
  */
 bool TradeArea::legal(Card *card) {
-
   bool found = false;
   list<Card *>::iterator i;
+
+  // Chercher la carte dans le TradeArea
   for (i = tradeAr.begin(); i != tradeAr.end(); i++) {
     if ((*i)->getName() == card->getName())
       found = true;

@@ -61,8 +61,8 @@ Card *Hand::getCard(int pos) {
  */
 ostream &operator<<(ostream &output, Hand &hand) {
 
-  for (int pos = 0; pos < hand.numCards(); pos++) {
-    output << hand.getCard(pos) << endl;
+  for (int i = 0; i < hand.numCards(); i++) {
+    output << hand.getCard(i) << endl;
   }
   return output;
 };

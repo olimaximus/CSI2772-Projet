@@ -1,13 +1,10 @@
-#ifndef HAND_H
-#define HAND_H
-
-#include "Card.h"
-
 #include <cstdlib>
 #include <list>
 #include <queue>
 #include <sstream>
-
+#ifndef HAND_H
+#define HAND_H
+#include "Card.h"
 
 using namespace std;
 

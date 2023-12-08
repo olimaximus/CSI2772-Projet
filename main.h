@@ -2,8 +2,6 @@
 #include <iostream>
 #include <string.h>
 #include <vector>
-
-
 #include "Card.h"
 #include "CardFactory.h"
 #include "Chain.h"
@@ -13,6 +11,5 @@
 #include "Player.h"
 #include "Table.h"
 #include "TradeArea.h"
-
 
 using namespace std;

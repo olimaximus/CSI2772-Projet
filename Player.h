@@ -1,11 +1,9 @@
-#ifndef PLAYER_H
-#define PLAYER_H
-
-#include "Chain.h"
-#include "Hand.h"
 #include <cstdlib>
 #include <vector>
-
+#ifndef PLAYER_H
+#define PLAYER_H
+#include "Chain.h"
+#include "Hand.h"
 
 using namespace std;
 
