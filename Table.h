@@ -12,8 +12,8 @@ class Table {
   Player *p1;
   Player *p2;
   int currentPlayer; // id du joueur courant
-  DiscardPile *dp;
-  TradeArea *tradeAr;
+  DiscardPile *discardPile;
+  TradeArea *tradeArea;
   Deck *deck;
   CardFactory *cf;
 
@@ -32,8 +32,8 @@ public:
         Deck &dck, CardFactory &cfactory) {
     p1 = &p_one;
     p2 = &p_two;
-    dp = &d_pile;
-    tradeAr = &tr_arr;
+    discardPile = &d_pile;
+    tradeArea = &tr_arr;
     deck = &dck;
     cf = &cfactory;
   }
@@ -45,8 +45,8 @@ public:
   ~Table() {
     delete p1;
     delete p2;
-    delete dp;
-    delete tradeAr;
+    delete discardPile;
+    delete tradeArea;
     delete deck;
     delete cf;
   }

@@ -10,7 +10,7 @@ using namespace std;
 class CardFactory;
 
 class TradeArea {
-  list<Card *> tradeAr;
+  list<Card *> tradeArea;
   const int MAX_CARDS;
 
 public:
@@ -60,7 +60,7 @@ public:
         exit(1);
       }
       if (card != nullptr)
-        tradeAr.push_back(card);
+        tradeArea.push_back(card);
     }
 
     cout << "Espace d'echange initialise avec " << count
@@ -74,10 +74,10 @@ public:
    */
   TradeArea &operator+=(Card *card) {
     if (this->legal(card)) {
-      tradeAr.push_back(card);
+      tradeArea.push_back(card);
     } else {
-      if (tradeAr.size() < 3) {
-        tradeAr.push_back(card);
+      if (tradeArea.size() < 3) {
+        tradeArea.push_back(card);
       } else {
         cout << "La carte " << card->getName()
              << " n'a pas pu etre ajoutee a l'espace d'echange" << endl;

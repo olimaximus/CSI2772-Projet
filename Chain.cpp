@@ -1,5 +1,4 @@
 #include "Chain.h"
-#include <iomanip>
 
 //Retourne le nombre de cartes dans une chaine
 int Chain_Base::getSize() { return chain.size(); }
@@ -18,13 +17,14 @@ string Chain_Base::getChainType() { return chainType; }
  * @brief Écrire une chaine dans un fichier
  *
  * @tparam T
- * @param filename
+ * @param file
  */
-void Chain_Base::saveChain(ofstream &filename) {
-  filename << endl << chainType << endl;
+void Chain_Base::saveChain(ofstream &file) {
+  file << endl << chainType << endl;
+  
   for (int i = 0; i < chain.size(); i++) {
-    chain.at(i)->saveCard(filename);
-    filename << endl;
+    chain.at(i)->saveCard(file);
+    file << endl;
   }
 
   cout << "Chaine sauvegardee" << endl;
@@ -38,7 +38,9 @@ void Chain_Base::saveChain(ofstream &filename) {
  * @return ostream&
  */
 ostream &operator<<(ostream &output, const Chain<Card *> &c) {
-  output << c.chainType << " ";
+  output << c.chainType << "\t";
+
+  // Afficher chaque carte dans une chaîne
   for (int i = 0; i < c.chain.size(); i++) {
     c.chain.at(i)->print(output);
     output << " ";
@@ -55,7 +57,9 @@ ostream &operator<<(ostream &output, const Chain<Card *> &c) {
  * @return ostream&
  */
 ostream &operator<<(ostream &output, const Chain_Base &c) {
-  output << c.chainType << " " << setw(4);
+  output << c.chainType << "\t" << setw(4);
+
+  // Afficher chaque carte dans une chaîne de base
   for (int i = 0; i < c.chain.size(); i++) {
     c.chain.at(i)->print(output);
     output << " ";

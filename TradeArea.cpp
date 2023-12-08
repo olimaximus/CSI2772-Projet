@@ -11,10 +11,10 @@ Card *TradeArea::trade(string card) {
   list<Card *>::iterator i;
 
   // Chercher la carte dans le TradeArea
-  for (i = tradeAr.begin(); i != tradeAr.end(); i++) {
+  for (i = tradeArea.begin(); i != tradeArea.end(); i++) {
     if ((*i)->getName() == card) {
       cardFound = *i;
-      tradeAr.erase(i); // Supprimer la carte
+      tradeArea.erase(i); // Supprimer la carte
       break;
     }
   }
@@ -34,7 +34,7 @@ bool TradeArea::legal(Card *card) {
   list<Card *>::iterator i;
 
   // Chercher la carte dans le TradeArea
-  for (i = tradeAr.begin(); i != tradeAr.end(); i++) {
+  for (i = tradeArea.begin(); i != tradeArea.end(); i++) {
     if ((*i)->getName() == card->getName())
       found = true;
   }
@@ -45,7 +45,7 @@ bool TradeArea::legal(Card *card) {
 
 
 //Retourne le nombre de cartes dans le TradeArea
-int TradeArea::numCards() { return tradeAr.size(); }
+int TradeArea::numCards() { return tradeArea.size(); }
 
 /**
  * @brief Opérateur d'insertion pour afficher le TradeArea
@@ -56,7 +56,7 @@ int TradeArea::numCards() { return tradeAr.size(); }
  */
 ostream &operator<<(ostream &output, const TradeArea &tr_arr) {
 
-  for (auto card : tr_arr.tradeAr) {
+  for (auto card : tr_arr.tradeArea) {
     output << card->getName()[0] << " ";
   }
 
@@ -66,12 +66,13 @@ ostream &operator<<(ostream &output, const TradeArea &tr_arr) {
 /**
  * @brief Écrire le TradeArea dans un fichier
  *
- * @param filename
+ * @param file
  */
-void TradeArea::saveTradeArea(ofstream &filename) {
-  for (auto card : tradeAr) {
-    card->saveCard(filename);
-    filename << endl;
+void TradeArea::saveTradeArea(ofstream &file) {
+
+  for (auto card : tradeArea) {
+    card->saveCard(file);
+    file << endl;
   }
 
   cout << "Espace d'echange sauvegarde" << endl;
@@ -82,4 +83,4 @@ void TradeArea::saveTradeArea(ofstream &filename) {
  *
  * @return list<Card*>
  */
-list<Card *> TradeArea::getListOfCards() { return tradeAr; }
+list<Card *> TradeArea::getListOfCards() { return tradeArea; }

@@ -15,10 +15,10 @@ int main() {
 
   CardFactory *cf = CardFactory::getFactory();
   Deck *deck = nullptr;
-  DiscardPile *dp = new DiscardPile;
-  TradeArea *trAr = new TradeArea;
+  DiscardPile *discardPile = new DiscardPile;
+  TradeArea *tradeArea = new TradeArea;
 
-  Table *tb;
+  Table *table;
 
   char input[2];
 
@@ -28,25 +28,25 @@ int main() {
 
   // Chercher les fichiers, sinon les initialiser
   if (input[0] == 'o') {
-    tb = new Table(*p1, *p2, *dp, *trAr, *deck, *cf);
+    table = new Table(*p1, *p2, *discardPile, *tradeArea, *deck, *cf);
 
     // Obtenir les joueurs
-    tb->reloadPlayer(1);
-    tb->reloadPlayer(2);
-    p1 = tb->getPlayer(1);
-    p2 = tb->getPlayer(2);
+    table->reloadPlayer(1);
+    table->reloadPlayer(2);
+    p1 = table->getPlayer(1);
+    p2 = table->getPlayer(2);
 
     // Obtenir le Deck
-    tb->reloadDeck();
-    deck = tb->getDeck();
+    table->reloadDeck();
+    deck = table->getDeck();
 
     // Obtenir la DiscardPile
-    tb->reloadDiscardPile();
-    dp = tb->getDiscardPile();
+    table->reloadDiscardPile();
+    discardPile = table->getDiscardPile();
 
     // Obtenir le TradeArea
-    tb->reloadTradeArea();
-    trAr = tb->getTradeArea();
+    table->reloadTradeArea();
+    tradeArea = table->getTradeArea();
 
   } else { // Initialiser une nouvelle partie
     cout << endl;
@@ -63,15 +63,15 @@ int main() {
     p1 = new Player(p1_name);
     p2 = new Player(p2_name);
 
-    tb = new Table(*p1, *p2, *dp, *trAr, *deck, *cf);
+    table = new Table(*p1, *p2, *discardPile, *tradeArea, *deck, *cf);
 
     pArr[0] = p1;
     pArr[1] = p2;
 
     //Obtenir les éléments restants
-    deck = tb->getDeck();
-    dp = tb->getDiscardPile();
-    trAr = tb->getTradeArea();
+    deck = table->getDeck();
+    discardPile = table->getDiscardPile();
+    tradeArea = table->getTradeArea();
 
     // Piger 5 cartes par joueur
     cout << "Donner 5 cartes a chaque joueur " << endl;
@@ -89,20 +89,20 @@ int main() {
     cin >> input;
     if (input[0] == 'o') {
       // Sauvegarder le jeu
-      tb->saveTable();
+      table->saveTable();
       cout << "Partie sauvegardee" << endl;
       break;
     } else { // Commencer à jouer
       for (int i = 0; i < MAX_NUM_PLAYER; i++) {
 
         // Afficher la table
-        cout << endl << "Info de la table:" << endl << endl << *tb << endl;
+        cout << endl << "Info de la table:" << endl << endl << *table << endl;
 
         // Tour du joueur
         cout << endl;
         cout << "Tour du joueur " << i + 1 << endl;
         cout << endl;
-        Player *p = tb->getPlayer(i);
+        Player *p = table->getPlayer(i);
 
         // Piger une carte
         cout << "Obtention de la premiere carte du paquet" << endl;
@@ -114,8 +114,8 @@ int main() {
 
         // Ajouter les cartes restantes du TradeArea aux chaines du joueur,
         // sinon à la DiscardPile
-        if (trAr->numCards() > 0) {
-          for (Card *card : trAr->getListOfCards()) {
+        if (tradeArea->numCards() > 0) {
+          for (Card *card : tradeArea->getListOfCards()) {
             bool cardAdded = false;
             for (Chain_Base *chain : *(p->getChains())) {
               if (card->getName() ==
@@ -124,7 +124,7 @@ int main() {
                 card->print(cout);
                 cout << " ajoutee de l'espace d'echange a la chaine "
                      << chain->getChainType() << " du joueur" << endl;
-                *chain += trAr->trade(card->getName());
+                *chain += tradeArea->trade(card->getName());
                 
                 cardAdded = true;
               }
@@ -135,7 +135,7 @@ int main() {
               card->print(cout);
               cout << " ajoutee de l'espace d'echange a la pile de discarte" << endl;
 
-              *dp += trAr->trade(card->getName());
+              *discardPile += tradeArea->trade(card->getName());
             }
           }
         }
@@ -215,7 +215,7 @@ int main() {
           card->print(cout);
           cout << " ajoutee a la pile de discarte" << endl;
 
-          *dp += card;
+          *discardPile += card;
         }
 
         // Piger 3 cartes vers le TradeArea
@@ -223,16 +223,16 @@ int main() {
              << "Piger trois cartes du paquet vers l'espace d'echange" << endl
              << endl;
         for (int i = 0; i < 3; i++) {
-          *trAr += (deck->draw());
+          *tradeArea += (deck->draw());
         }
 
         // Ajouter des cartes de la Discard Pile tant qu'elles correspondent
-        while (dp->size() > 0 && trAr->legal(dp->top())) {
+        while (discardPile->size() > 0 && tradeArea->legal(discardPile->top())) {
           cout << "Carte ";
-          dp->top()->print(cout);
+          discardPile->top()->print(cout);
           cout << " ajoutee de la pile de discarte vers l'espace d'echange" << endl;
 
-          *trAr += (dp->pickUp());
+          *tradeArea += (discardPile->pickUp());
         }
 
         cout << endl << *p << endl;
@@ -240,24 +240,24 @@ int main() {
         cout << endl << "Main du joueur " << i + 1 << endl;
         p->printHand(cout, true);
 
-        cout << endl << "Espace d'echange: " << *trAr << endl;
+        cout << endl << "Espace d'echange: " << *tradeArea << endl;
 
         // Pour chaque carte du TradeArea, demander au joueur s'il veut la
         // chainer
-        for (Card *card : trAr->getListOfCards()) {
+        for (Card *card : tradeArea->getListOfCards()) {
           cout << endl << "Voulez-vous chainer la carte ";
           card->print(cout);
           cout << "? (o/n) " << endl;
           cin >> input;
 
           if (input[0] == 'o') {
-            p->playCard(trAr->trade(card->getName()), true);
+            p->playCard(tradeArea->trade(card->getName()), true);
             cout << endl << *p << endl;
 
             cout << endl << "Main du joueur " << i + 1 << endl;
             p->printHand(cout, true);
 
-            cout << endl << "Espace d'echange: " << *trAr << endl;
+            cout << endl << "Espace d'echange: " << *tradeArea << endl;
           } else {
             cout << endl << "Carte laissee dans l'espace d'echange" << endl;
           }
@@ -276,7 +276,7 @@ int main() {
         p->printHand(cout, true);
 
         cout << endl << endl << "Pile de discarte: ";
-        dp->print(cout);
+        discardPile->print(cout);
         cout << endl;
       }
     }
@@ -284,16 +284,16 @@ int main() {
 
   // Le jeu fini lorsqu'il n'y a plus de cartes dans le paquet
   if (deck->size() == 0) {
-    cout << endl << "Info de la table" << endl << endl << *tb << endl;
+    cout << endl << "Info de la table" << endl << endl << *table << endl;
     cout << "Aucune carte restante dans le paquet" << endl;
 
     string gagnant;
-    tb->win(gagnant);
+    table->win(gagnant);
     cout << endl << "Le gagnant est: " << gagnant << endl;
   }
 
   // Libérer la mémoire
-  delete tb;
+  delete table;
   delete[] pArr;
 
   return 0;

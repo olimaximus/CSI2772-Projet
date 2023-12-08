@@ -189,7 +189,8 @@ int Player::getNumCoins() { return playerCoins; }
  * @return ostream
  */
 ostream &operator<<(ostream &output, const Player &player) {
-  output << player.playerName << setw(5) << player.playerCoins << " pieces" << endl;
+  output << player.playerName << setw(6) << player.playerCoins << " pieces" << endl;
+  
   for (auto chain : player.playerChains) {
     output << *chain;
     output << endl;

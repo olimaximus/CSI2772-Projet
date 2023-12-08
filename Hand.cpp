@@ -64,6 +64,7 @@ ostream &operator<<(ostream &output, Hand &hand) {
   for (int i = 0; i < hand.numCards(); i++) {
     output << hand.getCard(i) << endl;
   }
+  
   return output;
 };
 

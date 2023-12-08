@@ -57,10 +57,10 @@ ostream &operator<<(ostream &output, const Table &tb) {
   output << "Joueur 2:" << endl << endl << *(tb.p2) << endl;
 
   // Imprimer la DiscardPile
-  output << "Dessus de la pile de discarte: " << *tb.dp << endl << endl;
+  output << "Dessus de la pile de discarte: " << *tb.discardPile << endl << endl;
 
   // Imprimer le TradeArea
-  output << "Espace d'echange: " << *tb.tradeAr << endl << endl;
+  output << "Espace d'echange: " << *tb.tradeArea << endl << endl;
   return output;
 };
 
@@ -79,12 +79,12 @@ void Table::saveTable() {
 
   // Sauvegarder la DiscardPile
   file.open("DiscardPile.txt", ios::trunc);
-  dp->saveDiscardPile(file);
+  discardPile->saveDiscardPile(file);
   file.close();
 
   // Sauvegarder le TradeArea
   file.open("TradeArea.txt", ios::trunc);
-  tradeAr->saveTradeArea(file);
+  tradeArea->saveTradeArea(file);
   file.close();
 
   // Sauvegarder le deck
@@ -136,10 +136,10 @@ void Table::reloadDeck() {
 void Table::reloadDiscardPile() {
   ifstream file("DiscardPile.txt");
   if (file.is_open()) {
-    dp = new DiscardPile(file, cf);
+    discardPile = new DiscardPile(file, cf);
     file.close();
   } else { // Fichier manquant
-    dp = new DiscardPile;
+    discardPile = new DiscardPile;
     cout << "DiscardPile.txt manquant: Pile de discarte vide cree." << endl;
   }
 }
@@ -148,11 +148,11 @@ void Table::reloadDiscardPile() {
 void Table::reloadTradeArea() {
   ifstream file("TradeArea.txt");
   if (file.is_open()) {
-    tradeAr = new TradeArea(file, cf);
+    tradeArea = new TradeArea(file, cf);
     file.close();
   } else {
     // file not found
-    tradeAr = new TradeArea;
+    tradeArea = new TradeArea;
     cout << "TradeArea.txt manquant: Espace d'echange vide cree." << endl;
   }
 }
@@ -166,7 +166,7 @@ Deck *Table::getDeck() {
 }
 
 //Retourne la DiscardPile de la Table
-DiscardPile *Table::getDiscardPile() { return dp; }
+DiscardPile *Table::getDiscardPile() { return discardPile; }
 
 //Retourne le TradeArea de la Table
-TradeArea *Table::getTradeArea() { return tradeAr; }
+TradeArea *Table::getTradeArea() { return tradeArea; }

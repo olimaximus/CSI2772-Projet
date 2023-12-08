@@ -35,13 +35,13 @@ void DiscardPile::print(ostream &os) {
  * DiscardPile
  *
  * @param output
- * @param dp
+ * @param discardPile
  * @return ostream&
  */
-ostream &operator<<(ostream &output, const DiscardPile &dp) {
+ostream &operator<<(ostream &output, const DiscardPile &discardPile) {
 
-  if (dp.size() > 0)
-    (dp.back())->print(output);
+  if (discardPile.size() > 0)
+    (discardPile.back())->print(output);
   else
     output << "";
 
@@ -51,12 +51,15 @@ ostream &operator<<(ostream &output, const DiscardPile &dp) {
 /**
  * @brief Écrire la DiscardPile dans un fichier
  *
- * @param filename
+ * @param file
  */
-void DiscardPile::saveDiscardPile(ofstream &filename) {
+void DiscardPile::saveDiscardPile(ofstream &file) {
+
+  // Passer à travers chaque carte pour les sauvegarder
   for (int i = 0; i < this->size(); i++) {
-    this->at(i)->saveCard(filename);
-    filename << endl;
+    this->at(i)->saveCard(file);
+    file << endl;
   }
+
   cout << "Pile de discarte sauvegardee" << endl;
 }
